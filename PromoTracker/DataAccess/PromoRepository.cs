@@ -25,7 +25,15 @@ namespace PromoTracker.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<Promotion>("select * from Promotion");
+                var result = connection.Query<Promotion>(@"SELECT 
+                                                            Id = id,
+                                                            Name = name,
+                                                            Start = start,
+                                                            End = end,
+                                                            Desc = desc,
+                                                            Category = category,
+                                                            Restrictions = restrictions
+                                                        FROM promotion");
                 return result.ToList();
             }
         }
