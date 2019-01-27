@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PromoTracker.DataAccess;
+using PromoTracker.Models;
 
 namespace PromoTracker.Controllers
 {
@@ -24,6 +25,13 @@ namespace PromoTracker.Controllers
         public IActionResult GetPromotions()
         {
             return Ok(_promos.GetPromotions());
+        }
+
+        [HttpPost]
+        public IActionResult PostPromo(Promotion promotion)
+        {
+            var newPromotion = _promos.PostPromo(promotion);
+            return Ok(newPromotion);
         }
     }
 }

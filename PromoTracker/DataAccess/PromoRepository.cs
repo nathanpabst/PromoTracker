@@ -32,5 +32,17 @@ namespace PromoTracker.DataAccess
                 //return result.ToList();
             }
         }
+
+        public bool PostPromo(Promotion promotion)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute(@"INSERT INTO [dbo].[promotion]
+                                                    ([id], [name], [start], [end], [desc], [category], [restrictions])
+                                                VALUES(@id, @name, @start, @end, @desc, @category, @restrictions)", promotion);
+                return result == 1;
+            }
+        }
     }
 }
