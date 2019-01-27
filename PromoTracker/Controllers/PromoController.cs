@@ -20,8 +20,8 @@ namespace PromoTracker.Controllers
             _promos = new PromoRepository(config);
         }
 
-        [HttpGet("promos")]
-        public IActionResult GetPromos()
+        [HttpGet]
+        public IActionResult GetPromotions()
         {
             return Ok(_promos.GetPromotions());
         }

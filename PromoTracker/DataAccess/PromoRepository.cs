@@ -11,7 +11,7 @@ namespace PromoTracker.DataAccess
 {
     public class PromoRepository
     {
-        static List<Promotion> _promotions = new List<Promotion>();
+        //static List<Promotion> _promotions = new List<Promotion>();
 
         private readonly string ConnectionString;
 
@@ -20,21 +20,16 @@ namespace PromoTracker.DataAccess
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public List<Promotion> GetPromotions()
+        public IEnumerable<Promotion> GetPromotions()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<Promotion>(@"SELECT 
-                                                            Id = id,
-                                                            Name = name,
-                                                            Start = start,
-                                                            End = end,
-                                                            Desc = desc,
-                                                            Category = category,
-                                                            Restrictions = restrictions
+                var result = connection.Query<Promotion>(@"SELECT *
+                                                            
                                                         FROM promotion");
-                return result.ToList();
+                return result;
+                //return result.ToList();
             }
         }
     }
