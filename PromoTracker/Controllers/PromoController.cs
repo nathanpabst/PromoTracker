@@ -41,5 +41,12 @@ namespace PromoTracker.Controllers
             var deletePromo = _promos.DeletePromoById(id);
             return Ok(deletePromo);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePromo(int id, Promotion promotion)
+        {
+            var replaceValues = _promos.UpdatePromoInfo(id, promotion);
+            return Ok(replaceValues);
+        }
     }
 }

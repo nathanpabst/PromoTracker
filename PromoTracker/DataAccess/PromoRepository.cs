@@ -55,5 +55,32 @@ namespace PromoTracker.DataAccess
                 return result == 1;
             }
         }
+
+        public bool UpdatePromoInfo(int id, Promotion promotion)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Execute(@"UPDATE [dbo].[promotion]
+                                                    SET [name] = @Name,
+                                                        [start] = @Start,
+                                                        [end] = @End,
+                                                        [desc] = @Desc,
+                                                        [category] = @Category,
+                                                        [restrictions] = @Restrictions
+                                                    WHERE id = @Id",
+                                                    new
+                                                    {
+                                                        id,
+                                                        promotion.Name,
+                                                        promotion.Start,
+                                                        promotion.End,
+                                                        promotion.Desc,
+                                                        promotion.Category,
+                                                        promotion.Restrictions
+                                                    });
+                return result == 1;
+            }
+        }
     }
 }
+
