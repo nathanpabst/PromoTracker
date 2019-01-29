@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import Navbar from './components/Navbar/Navbar';
+import { BrowserRouter, Route, Router, Switch } from 'react-router-dom';
+import NavBar from './components/Navbar/Navbar';
+import Admin from './components/Admin/Admin';
+import IngramSpark from './components/IngramSpark/IngramSpark';
+import SparkReporting from './components/Reporting/SparkReporting';
 
-class App extends React.Component {
-  displayName = App.name
+class App extends Component {
+  //displayName = App.name
 
   render() {
     return (
-        <div className="App">
-            <Route>
+        <div >
+            <BrowserRouter>
                 <div>
-                    <Navbar />
+                    <NavBar />
+                
+                    <Switch>               
+                        <Route path="/admin" exact component={Admin} />
+                        <Route path="/ingramspark" exact component={IngramSpark} />
+                        <Route path="/sparkReporting" exact component={SparkReporting} />
+                        
+                    </Switch>
                 </div>
-            </Route>
+
+            </BrowserRouter>
         </div>
     );
   }
