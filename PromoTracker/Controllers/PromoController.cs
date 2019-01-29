@@ -24,7 +24,8 @@ namespace PromoTracker.Controllers
         [HttpGet]
         public IActionResult GetPromotions()
         {
-            return Ok(_promos.GetPromotions());
+            var promoList = _promos.GetPromotions();
+            return Ok(promoList);
         }
 
         [HttpPost]
