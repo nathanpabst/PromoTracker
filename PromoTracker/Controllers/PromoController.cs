@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Configuration;
 using PromoTracker.DataAccess;
+using PromoTracker.Models;
 
 namespace PromoTracker.Controllers
 {
@@ -13,11 +14,24 @@ namespace PromoTracker.Controllers
     [ApiController]
     public class PromoController : ControllerBase
     {
-        private readonly PromoRepository _repository;
+        private readonly PromoRepository _promos;
 
-        public PromoController(PromoRepository repository)
+        public PromoController(IConfiguration config)
         {
-            _repository = repository;
+            _promos = new PromoRepository(config);
+        }
+
+        [HttpGet]
+        public IActionResult GetPromotions()
+        {
+            return Ok(_promos.GetPromotions());
+        }
+
+        [HttpPost]
+        public IActionResult PostPromo(Promotion promotion)
+        {
+            var newPromotion = _promos.PostPromo(promotion);
+            return Ok(newPromotion);
         }
     }
 }
