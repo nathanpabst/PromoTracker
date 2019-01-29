@@ -44,5 +44,16 @@ namespace PromoTracker.DataAccess
                 return result == 1;
             }
         }
+
+        public bool DeletePromoById(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute(@"DELETE FROM [dbo].[promotion] WHERE id = @Id", new { id} );
+
+                return result == 1;
+            }
+        }
     }
 }
