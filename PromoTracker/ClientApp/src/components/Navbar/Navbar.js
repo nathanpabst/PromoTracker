@@ -23,8 +23,8 @@ class NavBar extends React.Component {
                                 IngramSpark
                             </NavItem>
                         </LinkContainer>
-                        <LinkContainer to="/reporting">
-                            <NavItem href="/reporting">
+                        <LinkContainer to="/sparkReporting">
+                            <NavItem href="/sparkReporting">
                                 Reporting
                             </NavItem>
                         </LinkContainer>

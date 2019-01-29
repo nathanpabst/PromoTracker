@@ -6,12 +6,12 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <h2>Admin</h2>
+                <h1>Admin</h1>
             </div>
 
             );
-    };
+    }
 
-};
+}
 
 export default Admin;
