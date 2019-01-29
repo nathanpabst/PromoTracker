@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import Navbar from './components/Navbar/Navbar';
+import { BrowserRouter, Route, Router, Switch } from 'react-router-dom';
+import NavBar from './components/Navbar/Navbar';
+import Admin from './components/Admin/Admin';
 
-class App extends React.Component {
-  displayName = App.name
+class App extends Component {
+  //displayName = App.name
 
   render() {
     return (
-        <div className="App">
-            <Route>
+        <div >
+            <BrowserRouter>
                 <div>
-                    <Navbar />
+                    <NavBar />
+                
+                    <Switch>
+                
+                        <Route path="/admin" exact component={Admin} />
+                        
+                    </Switch>
                 </div>
-            </Route>
+
+
+
+
+
+
+
+            </BrowserRouter>
         </div>
     );
   }
