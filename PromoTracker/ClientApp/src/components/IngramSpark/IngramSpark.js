@@ -25,7 +25,7 @@ class IngramSpark extends Component {
 
         const promoComponents = promos.map((promo) => (
             < div key = {promo.id} >
-                <Table striped bordered hover>
+                <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
                             <th>Name</th>
