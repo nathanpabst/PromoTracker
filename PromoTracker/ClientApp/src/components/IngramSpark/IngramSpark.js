@@ -1,14 +1,16 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import Search from './../Search/Search';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Modal, ModalDialog, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import './IngramSpark.css';
 
 class IngramSpark extends Component {
     state = {
-        promos: []
+        promos: [],
+        modalIsOpen: false
     };
+
     componentDidMount() {
         PromoRequests
             .getPromos()
@@ -18,6 +20,12 @@ class IngramSpark extends Component {
                 });
             })
             .catch(error => console.log(error));
+    }
+
+    toggleModal() {
+        this.setState({
+            modalIsOpen: !this.state.modalIsOpen
+        });
     }
 
     render() {
@@ -49,8 +57,22 @@ class IngramSpark extends Component {
                     
          ));
 
-    return(
-        <div className = "spark" >
+        return (
+            <div className="spark" >
+
+            <Modal.Dialog isOpen={this.state.modalIsOpen}>
+                <Modal.Header toggle={!this.toggleModal.bind(this)} closeButton>
+                    <Modal.Title>Modal Title</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Modal body text</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={this.toggleModal.bind(this)}>Close</Button>
+                </Modal.Footer>
+                </Modal.Dialog>
+
+
             <div className="search">
                 <Search />
             </div>
