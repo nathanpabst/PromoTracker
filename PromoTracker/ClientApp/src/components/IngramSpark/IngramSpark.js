@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import Search from './../Search/Search';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 import './IngramSpark.css';
 
@@ -37,13 +37,17 @@ class IngramSpark extends Component {
                         <tr>
                             <td>{promo.name}</td>
                             <td>{promo.end}</td>
+                            <td>
+                                <Button variant="primary" size="sm">
+                                    View
+                                </Button>
+                            </td>                              
                         </tr>
                     </tbody>
                 </Table>
             </div>
                     
          ));
-    //state not binding in return ..react
 
     return(
         <div className = "spark" >
