@@ -6,10 +6,16 @@ import { Table, Button, Modal, ModalDialog, ModalHeader, ModalTitle, ModalBody, 
 import './IngramSpark.css';
 
 class IngramSpark extends Component {
-    state = {
-        promos: [],
-        modalIsOpen: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            promos: [],
+            isModalOpen: false
+        };
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
 
     componentDidMount() {
         PromoRequests
@@ -22,17 +28,19 @@ class IngramSpark extends Component {
             .catch(error => console.log(error));
     }
 
-    toggleModal() {
-        this.setState({
-            modalIsOpen: !this.state.modalIsOpen
-        });
+    openModal() {
+        this.setState({ isModalOpen: true });
+    }
+
+    closeModal() {
+        this.setState({ isModalOpen: false });
     }
 
     render() {
         const { promos } = this.state;
 
         const promoComponents = promos.map((promo) => (
-            < div key = {promo.id} >
+            < div key={promo.id} >
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -46,47 +54,47 @@ class IngramSpark extends Component {
                             <td>{promo.name}</td>
                             <td>{promo.end}</td>
                             <td>
-                                <Button variant="primary" size="sm">
+                                <Button variant="primary" size="sm" onClick={this.openModal}>
                                     View
                                 </Button>
-                            </td>                              
+                            </td>
                         </tr>
                     </tbody>
                 </Table>
             </div>
-                    
-         ));
+
+        ));
 
         return (
             <div className="spark" >
 
-            <Modal.Dialog isOpen={this.state.modalIsOpen}>
-                <Modal.Header toggle={!this.toggleModal.bind(this)} closeButton>
-                    <Modal.Title>Modal Title</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>Modal body text</p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={this.toggleModal.bind(this)}>Close</Button>
-                </Modal.Footer>
-                </Modal.Dialog>
+                <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal Title</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Modal body text</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.closeModal}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
 
 
-            <div className="search">
-                <Search />
-            </div>
+                <div className="search">
+                    <Search />
+                </div>
 
-            <div className="promotions">
-                <div className="panel panel-primary">
-                    <div className="panel-heading">Active Promotions</div>
-                    <div className="panel-body">
-                        <ul className="promoComponents">{promoComponents}</ul>
+                <div className="promotions">
+                    <div className="panel panel-primary">
+                        <div className="panel-heading">Active Promotions</div>
+                        <div className="panel-body">
+                            <ul className="promoComponents">{promoComponents}</ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-      
+
         );
     }
 
