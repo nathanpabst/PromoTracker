@@ -70,7 +70,7 @@ class IngramSpark extends Component {
 
                 <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal Title</Modal.Title>
+                        <Modal.Title>{this.state.promos.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <p>Modal body text</p>
