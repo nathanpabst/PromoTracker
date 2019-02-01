@@ -1,4 +1,5 @@
 ﻿import axios from 'axios';
+//import register from '../../registerServiceWorker';
 
 const getPromos = () => {
     const apiPath = `api/promo`;
@@ -10,4 +11,14 @@ const getPromos = () => {
     });
 };
 
-export default { getPromos };
+const newPromo = (input) => {
+    const apiPath = `api/promo`;
+    return new Promise((resolve, reject) => {
+        axios
+            .post(apiPath, input)
+            .then(promo => resolve(promo))
+            .catch(error => reject(error));
+    });
+};
+
+export default { getPromos, newPromo };

@@ -54,7 +54,7 @@ class IngramSpark extends Component {
                             <td>{promo.name}</td>
                             <td>{promo.end}</td>
                             <td>
-                                <Button variant="primary" size="sm" onClick={this.openModal}>
+                                <Button variant="primary" size="sm" value={promo.id} onClick={this.openModal}>
                                     View
                                 </Button>
                             </td>
