@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import Search from './../Search/Search';
-import { Table, Button, Modal, ModalDialog, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Table, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import './IngramSpark.css';
 
@@ -60,10 +60,10 @@ class IngramSpark extends Component {
                             </td>
                         </tr>
                         <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>{promo.name}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
+                            <ModalHeader closeButton>
+                                <ModalTitle>{promo.name}</ModalTitle>
+                            </ModalHeader>
+                            <ModalBody>
                                 <p>Start Date: {promo.start}</p>
                                 <br />
                                 <p>End Date: {promo.end}</p> <br />
@@ -71,10 +71,10 @@ class IngramSpark extends Component {
                                 <p>Restrictions: {promo.restrictions}</p> <br />
                                 <p>Category: {promo.category}</p>
 
-                            </Modal.Body>
-                            <Modal.Footer>
+                            </ModalBody>
+                            <ModalFooter>
                                 <Button variant="secondary" onClick={this.closeModal}>Close</Button>
-                            </Modal.Footer>
+                            </ModalFooter>
                         </Modal>
                     </tbody>
                 </Table>

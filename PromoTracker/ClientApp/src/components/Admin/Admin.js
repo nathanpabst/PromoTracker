@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap';
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
 import PromoRequests from './../Requests/PromoRequests';
 
 
@@ -54,7 +54,7 @@ class Admin extends React.Component {
             this.setState({ show: true });
         }
 
-    handleChangeName = e => {
+    handleChangeName = (e) => {
         const addPromo = { ...this.state.addPromo };
         addPromo.name = e.target.value;
         this.setState({ addPromo });
@@ -88,19 +88,70 @@ class Admin extends React.Component {
     render() {
 
         const addPromo = this.state.addPromo;
+        const { promos } = this.state;
+
+        const promoComponents = promos.map((promo) => (
+            <div key={promo.id}>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>End Date </th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Restrictions</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{promo.name}</td>
+                            <td>{promo.start}</td>
+                            <td>{promo.end}</td>
+                            <td>{promo.desc}</td>
+                            <td>{promo.category}</td>
+                            <td>{promo.restrictions}</td>
+                            <td>
+                                <Button>Edit</Button>
+                            </td>
+                            <td>
+                                <Button>Delete</Button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
+
+
+        ));
 
         return (
             <div>
                 <div>
                     <h1>Admin</h1>
                 </div>
+
                 <Button onClick={this.handleShow}>Add Promotion</Button>
+
+                <div className="promotions">
+                    <div className="panel panel-primary">
+                        <div className="panel-heading">Active Promotions</div>
+                        <div className="panel-body">
+                            <ul className="promoComponents">{promoComponents}</ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <Modal show={this.state.show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title className="text-center">Add Promotion</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
+                        <ModalHeader closeButton>
+                            <ModalTitle className="text-center">Add Promotion</ModalTitle>
+                        </ModalHeader>
+                        <ModalBody>
                             <label> Promotion Name: </label>
                             <input
                                 type="text"
@@ -148,7 +199,7 @@ class Admin extends React.Component {
                                 value={addPromo.restrictions}
                                 //onChange={}
                             />
-                        </Modal.Body>
+                        </ModalBody>
                         <ModalFooter>
                             <Button onClick={this.handleAdd}>Save</Button>
                             <Button onClick={this.handleClose}>Cancel</Button>
