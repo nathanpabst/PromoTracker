@@ -59,6 +59,23 @@ class IngramSpark extends Component {
                                 </Button>
                             </td>
                         </tr>
+                        <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>{promo.name}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <p>Start Date: {promo.start}</p>
+                                <br />
+                                <p>End Date: {promo.end}</p> <br />
+                                <p>Description: {promo.desc}</p> <br />
+                                <p>Restrictions: {promo.restrictions}</p> <br />
+                                <p>Category: {promo.category}</p>
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.closeModal}>Close</Button>
+                            </Modal.Footer>
+                        </Modal>
                     </tbody>
                 </Table>
             </div>
@@ -67,19 +84,6 @@ class IngramSpark extends Component {
 
         return (
             <div className="spark" >
-
-                <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{this.state.promos.name}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>Modal body text</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.closeModal}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-
 
                 <div className="search">
                     <Search />
