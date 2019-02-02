@@ -41,16 +41,21 @@ class IngramSpark extends Component {
     render() {
         const { promos } = this.state;
 
-        const promoComponents = promos.map((promo) => (              
-                        <tr key={promo.id}>
-                            <td>{promo.name}</td>
-                            <td>{promo.end}</td>
-                            <td>
-                                <Button variant="primary" size="sm" value={promo.id} onClick={() => this.openModal(promo)}>
-                                    View
-                                </Button>
-                            </td>
-                        </tr>             
+        const promoComponents = promos.map((promo) => (
+            <tr key={promo.id}>
+                <td>{promo.name}</td>
+                <td>{promo.end}</td>
+                <td>
+                    <Button
+                        variant="primary"
+                        size="sm"
+                        value={promo.id}
+                        onClick={() => this.openModal(promo)}
+                    >
+                     View
+                    </Button>
+                </td>
+            </tr>
         ));
 
         return (
@@ -69,7 +74,7 @@ class IngramSpark extends Component {
                                     <tr>
                                         <th>Name</th>
                                         <th>Expiration</th>
-                                        <th> Details</th>
+                                        <th>Details</th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
