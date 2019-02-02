@@ -15,6 +15,7 @@ class Admin extends React.Component {
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.clearInput = this.clearInput.bind(this);
 
         this.state = {
             promos: [],
@@ -26,7 +27,7 @@ class Admin extends React.Component {
                 category: "",
                 restrictions: ""
             },
-            isModalOpen: false
+            isAddModalOpen: false
         };
     }
 
@@ -46,11 +47,15 @@ class Admin extends React.Component {
     }
 
     openModal() {
-        this.setState({ isModalOpen: true });
+        this.setState({ isAddModalOpen: true });
     }
 
     closeModal() {
-        this.setState({ isModalOpen: false });
+        this.setState({ isAddModalOpen: false });
+    }
+
+    clearInput() {
+        this.setState({ addPromo: "" });
     }
 
     handleAdd(promo) {
@@ -69,7 +74,8 @@ class Admin extends React.Component {
                     }
                 });
                 this.closeModal();
-                this.getPromotions();
+                this.getPromos();
+                this.clearInput();
             })
             .catch((error) => {
                 console.error(error, "error adding promotion");
@@ -82,14 +88,14 @@ class Admin extends React.Component {
                 .then(response => {
                     alert('this code is no mas.');
                     resolve(response);
+                    this.getPromos();
                 })
                 .catch(error => reject(error));
         });
-    };
+    }
 
     render() {
 
-        const addPromo = this.state.addPromo;
         const { promos } = this.state;
 
         const promoComponents = promos.map((promo) => (          
@@ -119,7 +125,7 @@ class Admin extends React.Component {
                 <Button onClick={this.openModal}>Add Promotion</Button>
 
                 <AddUpdateModal
-                    show={this.state.isModalOpen}
+                    show={this.state.isAddModalOpen}
                     hide={this.closeModal}
                     save={this.handleAdd}
                     promo={this.state.addPromo}
