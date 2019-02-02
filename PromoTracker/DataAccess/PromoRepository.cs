@@ -29,7 +29,6 @@ namespace PromoTracker.DataAccess
                                                             
                                                         FROM promotion");
                 return result;
-                //return result.ToList();
             }
         }
 
@@ -42,6 +41,16 @@ namespace PromoTracker.DataAccess
                                                     ([name], [start], [end], [desc], [category], [restrictions])
                                                 VALUES(@name, @start, @end, @desc, @category, @restrictions)", promotion);
                 return result == 1;
+            }
+        }
+
+        public IEnumerable<Promotion> GetPromoById(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<Promotion>(@"SELECT * FROM [dbo].[promotion] WHERE id = @Id", new { id });
+                return result;
             }
         }
 

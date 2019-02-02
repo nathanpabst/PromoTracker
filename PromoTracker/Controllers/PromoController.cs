@@ -28,6 +28,13 @@ namespace PromoTracker.Controllers
             return Ok(promoList);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetPromoById(int id)
+        {
+            var getById = _promos.GetPromoById(id);
+            return Ok(getById);
+        }
+
         [HttpPost]
         public IActionResult PostPromo(Promotion promotion)
         {

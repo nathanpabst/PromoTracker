@@ -45,15 +45,15 @@ class Admin extends React.Component {
             .catch(error => console.log(error));
     }
 
-    
 
-        handleClose() {
-            this.setState({ show: false });
-        }
 
-        handleShow() {
-            this.setState({ show: true });
-        }
+    handleClose() {
+        this.setState({ show: false });
+    }
+
+    handleShow() {
+        this.setState({ show: true });
+    }
 
     handleChangeName = (e) => {
         const addPromo = { ...this.state.addPromo };
@@ -61,28 +61,28 @@ class Admin extends React.Component {
         this.setState({ addPromo });
     };
 
-        handleAdd() {
-            const promoObj = this.state.addPromo;
-            PromoRequests
-                .newPromo(promoObj)
-                .then(() => {
-                    alert("Added!");
-                    this.setState({
-                        addPromo: {
-                            name: "",
-                            start: "",
-                            end: "",
-                            desc: "",
-                            category: "",
-                            restrictions: ""
-                        }
-                    });
-                    this.handleClose();
-                    this.getPromotions();
-                })
-                .catch((error) => {
-                    console.error(error, "error adding promotion");
+    handleAdd() {
+        const promoObj = this.state.addPromo;
+        PromoRequests
+            .newPromo(promoObj)
+            .then(() => {
+                alert("Added!");
+                this.setState({
+                    addPromo: {
+                        name: "",
+                        start: "",
+                        end: "",
+                        desc: "",
+                        category: "",
+                        restrictions: ""
+                    }
                 });
+                this.handleClose();
+                this.getPromotions();
+            })
+            .catch((error) => {
+                console.error(error, "error adding promotion");
+            });
     }
 
     handleDelete() {
@@ -98,7 +98,7 @@ class Admin extends React.Component {
         //});
     };
 
-    
+
     render() {
 
         const addPromo = this.state.addPromo;
@@ -179,7 +179,7 @@ class Admin extends React.Component {
                                 type=""
                                 name="start"
                                 value={addPromo.start}
-                                //onChange={}
+                            //onChange={}
                             />
                             <br />
                             <label> End Date: </label>
@@ -187,7 +187,7 @@ class Admin extends React.Component {
                                 type=""
                                 name="end"
                                 value={addPromo.end}
-                                //onChange={}
+                            //onChange={}
                             />
                             <br />
                             <label> Description: </label>
@@ -195,7 +195,7 @@ class Admin extends React.Component {
                                 type="text"
                                 name="desc"
                                 value={addPromo.desc}
-                                //onChange={}
+                            //onChange={}
                             />
                             <br />
                             <label> Category: </label>
@@ -203,7 +203,7 @@ class Admin extends React.Component {
                                 type="text"
                                 name="category"
                                 value={addPromo.category}
-                                //onChange={}
+                            //onChange={}
                             />
                             <br />
                             <label> Restrictions: </label>
@@ -211,7 +211,7 @@ class Admin extends React.Component {
                                 type="text"
                                 name="restrictions"
                                 value={addPromo.restrictions}
-                                //onChange={}
+                            //onChange={}
                             />
                         </ModalBody>
                         <ModalFooter>
@@ -222,8 +222,8 @@ class Admin extends React.Component {
                 </div>
             </div>
 
-            );
-        
+        );
+
     }
 }
 
