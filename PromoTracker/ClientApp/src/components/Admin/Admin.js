@@ -15,7 +15,7 @@ class Admin extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
-        this.handleDelete = this.getPromos.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
             promos: [],
@@ -116,11 +116,10 @@ class Admin extends React.Component {
             });
     }
 
-    handleDelete(e) {
-        console.log('e', e);
-        const promoId = this.state.id;
+    handleDelete(promo) {
+        console.log(promo);
         return new Promise((resolve, reject) => {
-            PromoRequests.deletePromo(promoId)
+            PromoRequests.deletePromo(promo.id)
                 .then(response => {
                     alert('this code is no mas.');
                     resolve(response);
@@ -163,7 +162,7 @@ class Admin extends React.Component {
                                 <Button>Edit</Button>
                             </td>
                             <td>
-                                <Button onClick={() => this.handleDelete}>Delete</Button>
+                                <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
                             </td>
 
                         </tr>
