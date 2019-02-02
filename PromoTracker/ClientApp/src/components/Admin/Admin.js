@@ -15,7 +15,7 @@ class Admin extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
-        this.handleDelete = this.getPromos.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
             promos: [],
@@ -116,11 +116,10 @@ class Admin extends React.Component {
             });
     }
 
-    handleDelete(e) {
-        console.log('e', e);
-        const promoId = this.state.id;
+    handleDelete(promo) {
+        console.log(promo);
         return new Promise((resolve, reject) => {
-            PromoRequests.deletePromo(promoId)
+            PromoRequests.deletePromo(promo.id)
                 .then(response => {
                     alert('this code is no mas.');
                     resolve(response);
@@ -135,24 +134,8 @@ class Admin extends React.Component {
         const addPromo = this.state.addPromo;
         const { promos } = this.state;
 
-        const promoComponents = promos.map((promo) => (
-            <div key={promo.id}>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date </th>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Restrictions</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+        const promoComponents = promos.map((promo) => (          
+                        <tr key={promo.id}>
                             <td>{promo.name}</td>
                             <td>{promo.start}</td>
                             <td>{promo.end}</td>
@@ -163,16 +146,11 @@ class Admin extends React.Component {
                                 <Button>Edit</Button>
                             </td>
                             <td>
-                                <Button onClick={() => this.handleDelete}>Delete</Button>
+                                <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
                             </td>
 
                         </tr>
-                    </tbody>
-                </Table>
-            </div>
-
-
-        ));
+         ));
 
         return (
             <div>
@@ -186,7 +164,23 @@ class Admin extends React.Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <ul className="promoComponents">{promoComponents}</ul>
+                            <Table striped bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Start Date</th>
+                                        <th>Expiration Date</th>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                        <th>Restrictions</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {promoComponents}
+                                </tbody>
+                            </Table>
                         </div>
                     </div>
                 </div>

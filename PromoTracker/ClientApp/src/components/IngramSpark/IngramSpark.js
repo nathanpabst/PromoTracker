@@ -42,29 +42,20 @@ class IngramSpark extends Component {
         const { promos } = this.state;
 
         const promoComponents = promos.map((promo) => (
-            < div key={promo.id} >
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Expiration</th>
-                            <th> Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{promo.name}</td>
-                            <td>{promo.end}</td>
-                            <td>
-                                <Button variant="primary" size="sm" value={promo.id} onClick={() => this.openModal(promo)}>
-                                    View
-                                </Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </div>
-
+            <tr key={promo.id}>
+                <td>{promo.name}</td>
+                <td>{promo.end}</td>
+                <td>
+                    <Button
+                        variant="primary"
+                        size="sm"
+                        value={promo.id}
+                        onClick={() => this.openModal(promo)}
+                    >
+                     View
+                    </Button>
+                </td>
+            </tr>
         ));
 
         return (
@@ -78,10 +69,22 @@ class IngramSpark extends Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <ul className="promoComponents">{promoComponents}</ul>
+                            <Table striped bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Expiration</th>
+                                        <th>Details</th>                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {promoComponents}
+                                </tbody>
+                            </Table>
                         </div>
                     </div>
                 </div>
+
                 <PromoViewModal
                     show={this.state.isModalOpen}
                     hide={this.closeModal}
