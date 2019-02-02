@@ -1,8 +1,7 @@
 ﻿import React from 'react';
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
-//import SinglePromo from './../Promotions/SinglePromo';
+import AddUpdateModal from './../Modals/AddUpdateModal';
 import PromoRequests from './../Requests/PromoRequests';
-
 
 import './Admin.css';
 
@@ -11,8 +10,8 @@ class Admin extends React.Component {
         super(props, context);
 
 
-        this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -27,7 +26,7 @@ class Admin extends React.Component {
                 category: "",
                 restrictions: ""
             },
-            show: false
+            isModalOpen: false
         };
     }
 
@@ -46,56 +45,17 @@ class Admin extends React.Component {
             .catch(error => console.log(error));
     }
 
-
-
-    handleClose() {
-        this.setState({ show: false });
+    openModal() {
+        this.setState({ isModalOpen: true });
     }
 
-    handleShow() {
-        this.setState({ show: true });
+    closeModal() {
+        this.setState({ isModalOpen: false });
     }
 
-    handleNameChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.name = e.target.value;
-        this.setState({ addPromo });
-    };
-
-    handleStartChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.start = e.target.value;
-        this.setState({ addPromo });
-    }
-
-    handleEndChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.end = e.target.value;
-        this.setState({ addPromo });
-    }
-
-    handleDescChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.desc = e.target.value;
-        this.setState({ addPromo });
-    }
-
-    handleCategoryChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.category = e.target.value;
-        this.setState({ addPromo });
-    }
-
-    handleRestrictionChange = (e) => {
-        const addPromo = { ...this.state.addPromo };
-        addPromo.restrictions = e.target.value;
-        this.setState({ addPromo });
-    }
-
-    handleAdd() {
-        const promoObj = this.state.addPromo;
+    handleAdd(promo) {
         PromoRequests
-            .newPromo(promoObj)
+            .newPromo(promo)
             .then(() => {
                 alert("Added!");
                 this.setState({
@@ -108,7 +68,7 @@ class Admin extends React.Component {
                         restrictions: ""
                     }
                 });
-                this.handleClose();
+                this.closeModal();
                 this.getPromotions();
             })
             .catch((error) => {
@@ -117,7 +77,6 @@ class Admin extends React.Component {
     }
 
     handleDelete(promo) {
-        console.log(promo);
         return new Promise((resolve, reject) => {
             PromoRequests.deletePromo(promo.id)
                 .then(response => {
@@ -127,7 +86,6 @@ class Admin extends React.Component {
                 .catch(error => reject(error));
         });
     };
-
 
     render() {
 
@@ -158,7 +116,14 @@ class Admin extends React.Component {
                     <h1>Admin</h1>
                 </div>
 
-                <Button onClick={this.handleShow}>Add Promotion</Button>
+                <Button onClick={this.openModal}>Add Promotion</Button>
+
+                <AddUpdateModal
+                    show={this.state.isModalOpen}
+                    hide={this.closeModal}
+                    save={this.handleAdd}
+                    promo={this.state.addPromo}
+                />
 
                 <div className="promotions">
                     <div className="panel panel-primary">
@@ -183,77 +148,9 @@ class Admin extends React.Component {
                             </Table>
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <Modal show={this.state.show} onHide={this.handleClose}>
-                        <ModalHeader closeButton>
-                            <ModalTitle className="text-center">Add Promotion</ModalTitle>
-                        </ModalHeader>
-                        <ModalBody>
-                            <label> Promotion Name: </label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={addPromo.name}
-                                onChange={this.handleNameChange}
-                            />
-                            <br />
-                            <label> Start Date: </label>
-                            <input
-                                type="date"
-                                name="start"
-                                value={addPromo.start}
-                                onChange={this.handleStartChange}
-
-                            />
-                            <br />
-                            <label> End Date: </label>
-                            <input
-                                type="date"
-                                name="end"
-                                value={addPromo.end}
-                                onChange={this.handleEndChange}
-
-                            />
-                            <br />
-                            <label> Description: </label>
-                            <input
-                                type="text"
-                                name="desc"
-                                value={addPromo.desc}
-                                onChange={this.handleDescChange}
-
-                            />
-                            <br />
-                            <label> Category: </label>
-                            <input
-                                type="text"
-                                name="category"
-                                value={addPromo.category}
-                                onChange={this.handleCategoryChange}
-
-                            />
-                            <br />
-                            <label> Restrictions: </label>
-                            <input
-                                type="text"
-                                name="restrictions"
-                                value={addPromo.restrictions}
-                                onChange={this.handleRestrictionChange}
-
-                            />
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button onClick={this.handleAdd}>Save</Button>
-                            <Button onClick={this.handleClose}>Cancel</Button>
-                        </ModalFooter>
-                    </Modal>
-                </div>
+                </div>               
             </div>
-
         );
-
     }
 }
 
