@@ -68,6 +68,30 @@ class Admin extends React.Component {
         this.setState({ addPromo });
     }
 
+    handleEndChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.end = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleDescChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.desc = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleCategoryChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.category = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleRestrictionChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.restrictions = e.target.value;
+        this.setState({ addPromo });
+    }
+
     handleAdd() {
         const promoObj = this.state.addPromo;
         PromoRequests
@@ -183,18 +207,20 @@ class Admin extends React.Component {
                             <br />
                             <label> Start Date: </label>
                             <input
-                                type=""
+                                type="date"
                                 name="start"
                                 value={addPromo.start}
-                            onChange={this.handleStartChange}
+                                onChange={this.handleStartChange}
+
                             />
                             <br />
                             <label> End Date: </label>
                             <input
-                                type=""
+                                type="date"
                                 name="end"
                                 value={addPromo.end}
-                            //onChange={}
+                                onChange={this.handleEndChange}
+
                             />
                             <br />
                             <label> Description: </label>
@@ -202,7 +228,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="desc"
                                 value={addPromo.desc}
-                            //onChange={}
+                                onChange={this.handleDescChange}
+
                             />
                             <br />
                             <label> Category: </label>
@@ -210,7 +237,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="category"
                                 value={addPromo.category}
-                            //onChange={}
+                                onChange={this.handleCategoryChange}
+
                             />
                             <br />
                             <label> Restrictions: </label>
@@ -218,7 +246,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="restrictions"
                                 value={addPromo.restrictions}
-                            //onChange={}
+                                onChange={this.handleRestrictionChange}
+
                             />
                         </ModalBody>
                         <ModalFooter>
