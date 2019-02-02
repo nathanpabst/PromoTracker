@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
+//import SinglePromo from './../Promotions/SinglePromo';
 import PromoRequests from './../Requests/PromoRequests';
 
 
@@ -14,6 +15,7 @@ class Admin extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
+        this.handleDelete = this.getPromos.bind(this);
 
         this.state = {
             promos: [],
@@ -44,47 +46,90 @@ class Admin extends React.Component {
             .catch(error => console.log(error));
     }
 
-    
 
-        handleClose() {
-            this.setState({ show: false });
-        }
 
-        handleShow() {
-            this.setState({ show: true });
-        }
+    handleClose() {
+        this.setState({ show: false });
+    }
 
-    handleChangeName = (e) => {
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+    handleNameChange = (e) => {
         const addPromo = { ...this.state.addPromo };
         addPromo.name = e.target.value;
         this.setState({ addPromo });
     };
 
-        handleAdd() {
-            const promoObj = this.state.addPromo;
-            PromoRequests
-                .newPromo(promoObj)
-                .then(() => {
-                    alert("Added!");
-                    this.setState({
-                        addPromo: {
-                            name: "",
-                            start: "",
-                            end: "",
-                            desc: "",
-                            category: "",
-                            restrictions: ""
-                        }
-                    });
-                    this.handleClose();
-                    this.getPromotions();
-                })
-                .catch((error) => {
-                    console.error(error, "error adding promotion");
-                });
-        }
+    handleStartChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.start = e.target.value;
+        this.setState({ addPromo });
+    }
 
-    
+    handleEndChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.end = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleDescChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.desc = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleCategoryChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.category = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleRestrictionChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.restrictions = e.target.value;
+        this.setState({ addPromo });
+    }
+
+    handleAdd() {
+        const promoObj = this.state.addPromo;
+        PromoRequests
+            .newPromo(promoObj)
+            .then(() => {
+                alert("Added!");
+                this.setState({
+                    addPromo: {
+                        name: "",
+                        start: "",
+                        end: "",
+                        desc: "",
+                        category: "",
+                        restrictions: ""
+                    }
+                });
+                this.handleClose();
+                this.getPromotions();
+            })
+            .catch((error) => {
+                console.error(error, "error adding promotion");
+            });
+    }
+
+    handleDelete(e) {
+        console.log('e', e);
+        const promoId = this.state.id;
+        return new Promise((resolve, reject) => {
+            PromoRequests.deletePromo(promoId)
+                .then(response => {
+                    alert('this code is no mas.');
+                    resolve(response);
+                })
+                .catch(error => reject(error));
+        });
+    };
+
+
     render() {
 
         const addPromo = this.state.addPromo;
@@ -118,7 +163,7 @@ class Admin extends React.Component {
                                 <Button>Edit</Button>
                             </td>
                             <td>
-                                <Button>Delete</Button>
+                                <Button onClick={() => this.handleDelete}>Delete</Button>
                             </td>
 
                         </tr>
@@ -162,18 +207,20 @@ class Admin extends React.Component {
                             <br />
                             <label> Start Date: </label>
                             <input
-                                type=""
+                                type="date"
                                 name="start"
                                 value={addPromo.start}
-                                //onChange={}
+                                onChange={this.handleStartChange}
+
                             />
                             <br />
                             <label> End Date: </label>
                             <input
-                                type=""
+                                type="date"
                                 name="end"
                                 value={addPromo.end}
-                                //onChange={}
+                                onChange={this.handleEndChange}
+
                             />
                             <br />
                             <label> Description: </label>
@@ -181,7 +228,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="desc"
                                 value={addPromo.desc}
-                                //onChange={}
+                                onChange={this.handleDescChange}
+
                             />
                             <br />
                             <label> Category: </label>
@@ -189,7 +237,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="category"
                                 value={addPromo.category}
-                                //onChange={}
+                                onChange={this.handleCategoryChange}
+
                             />
                             <br />
                             <label> Restrictions: </label>
@@ -197,7 +246,8 @@ class Admin extends React.Component {
                                 type="text"
                                 name="restrictions"
                                 value={addPromo.restrictions}
-                                //onChange={}
+                                onChange={this.handleRestrictionChange}
+
                             />
                         </ModalBody>
                         <ModalFooter>
@@ -208,8 +258,8 @@ class Admin extends React.Component {
                 </div>
             </div>
 
-            );
-        
+        );
+
     }
 }
 

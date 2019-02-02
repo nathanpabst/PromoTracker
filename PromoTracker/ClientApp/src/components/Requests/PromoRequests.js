@@ -11,6 +11,16 @@ const getPromos = () => {
     });
 };
 
+const getPromoById = (input) => {
+    const apiPath = `api/promo/${input}`;
+    return new Promise((resolve, reject) => {
+        axios
+            .get(apiPath, input)
+            .then(promo => resolve(promo))
+            .catch(error => reject(error));
+    });
+};
+
 const newPromo = (input) => {
     const apiPath = `api/promo`;
     return new Promise((resolve, reject) => {
@@ -21,4 +31,15 @@ const newPromo = (input) => {
     });
 };
 
-export default { getPromos, newPromo };
+const deletePromo = (input) => {
+    const apiPath = `api/promo/${input}`;
+    return new Promise((resolve, reject) => {
+        axios
+            .delete(apiPath, input)
+            .then(promo => resolve(promo))
+            .catch(error => reject(error));
+    });
+};
+
+
+export default { getPromos, newPromo, deletePromo, getPromoById };
