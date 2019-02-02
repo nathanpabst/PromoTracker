@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import Search from './../Search/Search';
+import PromoViewModal from './../Modals/PromoViewModal';
 import { Table, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import './IngramSpark.css';
@@ -11,7 +12,8 @@ class IngramSpark extends Component {
 
         this.state = {
             promos: [],
-            isModalOpen: false
+            isModalOpen: false,
+            singlePromo: {}
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -28,8 +30,8 @@ class IngramSpark extends Component {
             .catch(error => console.log(error));
     }
 
-    openModal() {
-        this.setState({ isModalOpen: true });
+    openModal(promo) {
+        this.setState({ isModalOpen: true, singlePromo: promo });
     }
 
     closeModal() {
@@ -54,28 +56,11 @@ class IngramSpark extends Component {
                             <td>{promo.name}</td>
                             <td>{promo.end}</td>
                             <td>
-                                <Button variant="primary" size="sm" value={promo.id} onClick={this.openModal}>
+                                <Button variant="primary" size="sm" value={promo.id} onClick={() => this.openModal(promo)}>
                                     View
                                 </Button>
                             </td>
                         </tr>
-                        <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
-                            <ModalHeader closeButton>
-                                <ModalTitle>{promo.name}</ModalTitle>
-                            </ModalHeader>
-                            <ModalBody>
-                                <p>Start Date: {promo.start}</p>
-                                <br />
-                                <p>End Date: {promo.end}</p> <br />
-                                <p>Description: {promo.desc}</p> <br />
-                                <p>Restrictions: {promo.restrictions}</p> <br />
-                                <p>Category: {promo.category}</p>
-
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button variant="secondary" onClick={this.closeModal}>Close</Button>
-                            </ModalFooter>
-                        </Modal>
                     </tbody>
                 </Table>
             </div>
@@ -97,6 +82,13 @@ class IngramSpark extends Component {
                         </div>
                     </div>
                 </div>
+                <PromoViewModal
+                    show={this.state.isModalOpen}
+                    hide={this.closeModal}
+                    promo={this.state.singlePromo}
+                />
+
+
             </div>
 
         );
