@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
+//import SinglePromo from './../Promotions/SinglePromo';
 import PromoRequests from './../Requests/PromoRequests';
 
 
@@ -55,11 +56,17 @@ class Admin extends React.Component {
         this.setState({ show: true });
     }
 
-    handleChangeName = (e) => {
+    handleNameChange = (e) => {
         const addPromo = { ...this.state.addPromo };
         addPromo.name = e.target.value;
         this.setState({ addPromo });
     };
+
+    handleStartChange = (e) => {
+        const addPromo = { ...this.state.addPromo };
+        addPromo.start = e.target.value;
+        this.setState({ addPromo });
+    }
 
     handleAdd() {
         const promoObj = this.state.addPromo;
@@ -85,17 +92,17 @@ class Admin extends React.Component {
             });
     }
 
-    handleDelete() {
+    handleDelete(e) {
+        console.log('e', e);
         const promoId = this.state.id;
-        console.log('promoId', promoId);
-        //return new Promise((resolve, reject) => {
-        //    PromoRequests.deletePromo(promoId)
-        //        .then(response => {
-        //            alert('this code is no mas.');
-        //            resolve(response);
-        //        })
-        //        .catch(error => reject(error));
-        //});
+        return new Promise((resolve, reject) => {
+            PromoRequests.deletePromo(promoId)
+                .then(response => {
+                    alert('this code is no mas.');
+                    resolve(response);
+                })
+                .catch(error => reject(error));
+        });
     };
 
 
@@ -179,7 +186,7 @@ class Admin extends React.Component {
                                 type=""
                                 name="start"
                                 value={addPromo.start}
-                            //onChange={}
+                            onChange={this.handleStartChange}
                             />
                             <br />
                             <label> End Date: </label>
