@@ -41,8 +41,8 @@ const deletePromo = (input) => {
     });
 };
 
-const updatePromo = (input) => {
-    const apiPath = `api/promo/${input}`;
+const updatePromo = (id, input) => {
+    const apiPath = `api/promo/${id}`;
     return new Promise((resolve, reject) => {
         axios
             .put(apiPath, input)

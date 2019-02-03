@@ -4,6 +4,7 @@ import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 
 import './Admin.css';
+import EditModal from '../Modals/EditModal';
 
 class Admin extends React.Component {
     constructor(props, context) {
@@ -16,6 +17,9 @@ class Admin extends React.Component {
         this.getPromos = this.getPromos.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.clearInput = this.clearInput.bind(this);
+        this.openEditModal = this.openEditModal.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
 
         this.state = {
             promos: [],
@@ -27,7 +31,9 @@ class Admin extends React.Component {
                 category: "",
                 restrictions: ""
             },
-            isAddModalOpen: false
+            updatePromo: [],
+            isAddModalOpen: false,
+            isEditModalOpen: false
         };
     }
 
@@ -50,8 +56,16 @@ class Admin extends React.Component {
         this.setState({ isAddModalOpen: true });
     }
 
+    openEditModal() {
+        this.setState({ isEditModalOpen: true });
+    }
+
     closeAddModal() {
         this.setState({ isAddModalOpen: false });
+    }
+
+    closeEditModal() {
+        this.setState({ isEditModalOpen: false });
     }
 
     clearInput() {
@@ -82,6 +96,24 @@ class Admin extends React.Component {
             });
     }
 
+    handleUpdate(id, promo) {
+        PromoRequests
+            .updatePromo(id, promo)
+            .then(() => {
+                alert("Updated!");
+                this.setState({
+                    updatePromo: {
+                        name: ""
+                    }
+                });
+                this.closeEditModal();
+                this.getPromos();
+            })
+            .catch((error) => {
+                console.error(error, "error updating promotion");
+            });
+    }
+
     handleDelete(promo) {
         return new Promise((resolve, reject) => {
             PromoRequests.deletePromo(promo.id)
@@ -107,7 +139,7 @@ class Admin extends React.Component {
                 <td>{promo.category}</td>
                 <td>{promo.restrictions}</td>
                 <td>
-                    <Button>Edit</Button>
+                    <Button onClick={() => this.openEditModal(promo)}>Edit</Button>
                 </td>
                 <td>
                     <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
@@ -130,6 +162,14 @@ class Admin extends React.Component {
                     save={this.handleAdd}
                     promo={this.state.addPromo}
                 />
+
+                <EditModal
+                    show={this.state.isEditModalOpen}
+                    hide={this.closeEditModal}
+                    save={this.handleUpdate}
+                    promo={this.state.updatePromo}
+                />
+
 
                 <div className="promotions">
                     <div className="panel panel-primary">
