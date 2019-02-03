@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
-import AddUpdateModal from './../Modals/AddUpdateModal';
+import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 
 import './Admin.css';
@@ -10,8 +10,8 @@ class Admin extends React.Component {
         super(props, context);
 
 
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.openAddModal = this.openAddModal.bind(this);
+        this.closeAddModal = this.closeAddModal.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -46,11 +46,11 @@ class Admin extends React.Component {
             .catch(error => console.log(error));
     }
 
-    openModal() {
+    openAddModal() {
         this.setState({ isAddModalOpen: true });
     }
 
-    closeModal() {
+    closeAddModal() {
         this.setState({ isAddModalOpen: false });
     }
 
@@ -73,7 +73,7 @@ class Admin extends React.Component {
                         restrictions: ""
                     }
                 });
-                this.closeModal();
+                this.closeAddModal();
                 this.getPromos();
                 this.clearInput();
             })
@@ -98,23 +98,23 @@ class Admin extends React.Component {
 
         const { promos } = this.state;
 
-        const promoComponents = promos.map((promo) => (          
-                        <tr key={promo.id}>
-                            <td>{promo.name}</td>
-                            <td>{promo.start}</td>
-                            <td>{promo.end}</td>
-                            <td>{promo.desc}</td>
-                            <td>{promo.category}</td>
-                            <td>{promo.restrictions}</td>
-                            <td>
-                                <Button>Edit</Button>
-                            </td>
-                            <td>
-                                <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
-                            </td>
+        const promoComponents = promos.map((promo) => (
+            <tr key={promo.id}>
+                <td>{promo.name}</td>
+                <td>{promo.start}</td>
+                <td>{promo.end}</td>
+                <td>{promo.desc}</td>
+                <td>{promo.category}</td>
+                <td>{promo.restrictions}</td>
+                <td>
+                    <Button>Edit</Button>
+                </td>
+                <td>
+                    <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
+                </td>
 
-                        </tr>
-         ));
+            </tr>
+        ));
 
         return (
             <div>
@@ -122,11 +122,11 @@ class Admin extends React.Component {
                     <h1>Admin</h1>
                 </div>
 
-                <Button onClick={this.openModal}>Add Promotion</Button>
+                <Button onClick={this.openAddModal}>Add Promotion</Button>
 
-                <AddUpdateModal
+                <AddModal
                     show={this.state.isAddModalOpen}
-                    hide={this.closeModal}
+                    hide={this.closeAddModal}
                     save={this.handleAdd}
                     promo={this.state.addPromo}
                 />
@@ -154,7 +154,7 @@ class Admin extends React.Component {
                             </Table>
                         </div>
                     </div>
-                </div>               
+                </div>
             </div>
         );
     }

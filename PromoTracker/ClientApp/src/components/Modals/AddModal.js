@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
 
-class AddUpdateModal extends Component {
+class AddModal extends Component {
     constructor(props, context) {
         super(props, context);
 
@@ -123,4 +123,4 @@ class AddUpdateModal extends Component {
     }
 }
 
-export default AddUpdateModal; 
+export default AddModal; 
