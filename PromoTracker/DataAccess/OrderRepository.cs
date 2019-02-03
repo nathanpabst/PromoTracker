@@ -28,16 +28,6 @@ namespace PromoTracker.DataAccess
             }
         }
 
-        public IEnumerable<Order> GetOrderById(int id)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var result = connection.Query<Order>(@"SELECT * 
-                                                        FROM [dbo].[order] 
-                                                        WHERE orderTypeId = @OrderTypeId", new { id });
-                return result;
-            }
-        }
+        
     }
 }
