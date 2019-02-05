@@ -31,7 +31,10 @@ class Admin extends React.Component {
                 category: "",
                 restrictions: ""
             },
-            updatePromo: [],
+            updatePromo: {
+                name: ""
+                
+            },
             isAddModalOpen: false,
             isEditModalOpen: false
         };
@@ -56,8 +59,8 @@ class Admin extends React.Component {
         this.setState({ isAddModalOpen: true });
     }
 
-    openEditModal() {
-        this.setState({ isEditModalOpen: true });
+    openEditModal(promo) {
+        this.setState({ isEditModalOpen: true, updatePromo: promo });
     }
 
     closeAddModal() {
@@ -139,7 +142,7 @@ class Admin extends React.Component {
                 <td>{promo.category}</td>
                 <td>{promo.restrictions}</td>
                 <td>
-                    <Button onClick={() => this.openEditModal(promo)}>Edit</Button>
+                    <Button id={promo.id} onClick={() => this.openEditModal(promo)}>Edit</Button>
                 </td>
                 <td>
                     <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
@@ -147,6 +150,8 @@ class Admin extends React.Component {
 
             </tr>
         ));
+
+        
 
         return (
             <div>
@@ -169,7 +174,6 @@ class Admin extends React.Component {
                     save={this.handleUpdate}
                     promo={this.state.updatePromo}
                 />
-
 
                 <div className="promotions">
                     <div className="panel panel-primary">

@@ -5,21 +5,24 @@ class EditModal extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            promo: []
-        };
-        
     }
-    componentDidMount() {
 
-        this.setState({ promo: this.props.promo });
-    }
+    //handleNameChange = (e) => {
+    //    const name = e.target.value;
+    //    this.setState({
+    //        promo: {
+    //            ...this.state.promo,
+    //            name,
+    //        }
+    //    });
+        
+    //};
 
     handleNameChange = (e) => {
-        const updatePromo = { ...this.props.promo.name };
-        updatePromo.name = e.target.value;
-        this.setState({ promo: updatePromo });
-    };
+        const addPromo = { ...this.props.promo };
+        addPromo.name = e.target.value;
+        this.setState({ promo: addPromo });
+    }
 
     //handleStartChange = (e) => {
     //    const addPromo = { ...this.state.promo };
@@ -52,7 +55,7 @@ class EditModal extends Component {
     //};
 
     render() {
-
+        const { promo } = this.props;
 
         return (
 
@@ -65,7 +68,7 @@ class EditModal extends Component {
                     <input
                         type="text"
                         name="name"
-                        value={this.props.promo.name}
+                        value={promo.name}
                         onChange={this.handleNameChange}
                     />
                     <br />
@@ -73,7 +76,7 @@ class EditModal extends Component {
                     <input
                         type="date"
                         name="start"
-                        value={this.state.promo.start}
+                        value={promo.start}
                         onChange={this.handleStartChange}
 
                     />
@@ -82,7 +85,7 @@ class EditModal extends Component {
                     <input
                         type="date"
                         name="end"
-                        value={this.state.promo.end}
+                        value={promo.end}
                         onChange={this.handleEndChange}
 
                     />
@@ -91,7 +94,7 @@ class EditModal extends Component {
                     <input
                         type="text"
                         name="desc"
-                        value={this.state.promo.desc}
+                        value={promo.desc}
                         onChange={this.handleDescChange}
 
                     />
@@ -100,7 +103,7 @@ class EditModal extends Component {
                     <input
                         type="text"
                         name="category"
-                        value={this.state.promo.category}
+                        value={promo.category}
                         onChange={this.handleCategoryChange}
 
                     />
@@ -109,13 +112,13 @@ class EditModal extends Component {
                     <input
                         type="text"
                         name="restrictions"
-                        value={this.state.promo.restrictions}
+                        value={promo.restrictions}
                         onChange={this.handleRestrictionChange}
 
                     />
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={this.props.handleUpdate}>Save</Button>
+                    <Button onClick={() => this.props.handleUpdate(promo.id, promo)}>Save</Button>
                     <Button onClick={this.props.hide}>Cancel</Button>
                 </ModalFooter>
             </Modal>
