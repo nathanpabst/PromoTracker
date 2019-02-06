@@ -32,7 +32,6 @@ class Admin extends React.Component {
                 restrictions: ""
             },
             updatePromo: {
-                name: ""
                 
             },
             isAddModalOpen: false,
@@ -106,7 +105,7 @@ class Admin extends React.Component {
                 alert("Updated!");
                 this.setState({
                     updatePromo: {
-                        name: ""
+
                     }
                 });
                 this.closeEditModal();

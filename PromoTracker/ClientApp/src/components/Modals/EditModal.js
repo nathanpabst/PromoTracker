@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter, DatePicker } from 'react-bootstrap';
 
 class EditModal extends Component {
     constructor(props, context) {
@@ -10,18 +10,7 @@ class EditModal extends Component {
         };
 
     }
-
-    //handleNameChange = (e) => {
-    //    const name = e.target.value;
-    //    this.setState({
-    //        promo: {
-    //            ...this.state.promo,
-    //            name,
-    //        }
-    //    });
-        
-    //};
-
+    
     handleNameChange = (e) => {
         const addPromo = { ...this.state.promo };
         addPromo.name = e.target.value;
