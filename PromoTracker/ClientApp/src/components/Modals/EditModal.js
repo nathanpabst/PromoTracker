@@ -5,6 +5,10 @@ class EditModal extends Component {
     constructor(props, context) {
         super(props, context);
 
+        this.state = {
+            promo: props.promo
+        };
+
     }
 
     //handleNameChange = (e) => {
@@ -19,43 +23,43 @@ class EditModal extends Component {
     //};
 
     handleNameChange = (e) => {
-        const addPromo = { ...this.props.promo };
+        const addPromo = { ...this.state.promo };
         addPromo.name = e.target.value;
         this.setState({ promo: addPromo });
     }
 
-    //handleStartChange = (e) => {
-    //    const addPromo = { ...this.state.promo };
-    //    addPromo.start = e.target.value;
-    //    this.setState({ promo: addPromo });
-    //};
+    handleStartChange = (e) => {
+        const addPromo = { ...this.state.promo };
+        addPromo.start = e.target.value;
+        this.setState({ promo: addPromo });
+    };
 
-    //handleEndChange = (e) => {
-    //    const addPromo = { ...this.state.promo };
-    //    addPromo.end = e.target.value;
-    //    this.setState({ promo: addPromo });
-    //};
+    handleEndChange = (e) => {
+        const addPromo = { ...this.state.promo };
+        addPromo.end = e.target.value;
+        this.setState({ promo: addPromo });
+    };
 
-    //handleDescChange = (e) => {
-    //    const addPromo = { ...this.state.promo };
-    //    addPromo.desc = e.target.value;
-    //    this.setState({ promo: addPromo });
-    //};
+    handleDescChange = (e) => {
+        const addPromo = { ...this.state.promo };
+        addPromo.desc = e.target.value;
+        this.setState({ promo: addPromo });
+    };
 
-    //handleCategoryChange = (e) => {
-    //    const addPromo = { ...this.state.promo };
-    //    addPromo.category = e.target.value;
-    //    this.setState({ promo: addPromo });
-    //};
+    handleCategoryChange = (e) => {
+        const addPromo = { ...this.state.promo };
+        addPromo.category = e.target.value;
+        this.setState({ promo: addPromo });
+    };
 
-    //handleRestrictionChange = (e) => {
-    //    const addPromo = { ...this.state.promo };
-    //    addPromo.restrictions = e.target.value;
-    //    this.setState({ promo: addPromo });
-    //};
+    handleRestrictionChange = (e) => {
+        const addPromo = { ...this.state.promo };
+        addPromo.restrictions = e.target.value;
+        this.setState({ promo: addPromo });
+    };
 
     render() {
-        const { promo } = this.props;
+        const { promo } = this.state;
 
         return (
 

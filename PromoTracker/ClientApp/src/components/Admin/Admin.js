@@ -20,7 +20,7 @@ class Admin extends React.Component {
         this.openEditModal = this.openEditModal.bind(this);
         this.closeEditModal = this.closeEditModal.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
-
+        
         this.state = {
             promos: [],
             addPromo: {
@@ -150,8 +150,13 @@ class Admin extends React.Component {
 
             </tr>
         ));
-
-        
+        const editModal = this.state.isEditModalOpen &&
+            (<EditModal
+                show={this.state.isEditModalOpen}
+                hide={this.closeEditModal}
+                save={this.handleUpdate}
+                promo={this.state.updatePromo}
+            />);
 
         return (
             <div>
@@ -168,12 +173,7 @@ class Admin extends React.Component {
                     promo={this.state.addPromo}
                 />
 
-                <EditModal
-                    show={this.state.isEditModalOpen}
-                    hide={this.closeEditModal}
-                    save={this.handleUpdate}
-                    promo={this.state.updatePromo}
-                />
+                {editModal}
 
                 <div className="promotions">
                     <div className="panel panel-primary">
