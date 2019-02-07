@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import OrderRequests from './../Requests/OrderRequests';
 import { Table, Button } from 'react-bootstrap';
+import Search from './../Search/Search';
 
 import './SparkReporting.css';
 import PromoRequests from '../Requests/PromoRequests';
@@ -11,7 +12,8 @@ class Reporting extends Component {
 
         this.state = {
             orders: [],
-            promos: []
+            promos: [],
+            searchTerm: ''
         };
     }
 
@@ -33,6 +35,10 @@ class Reporting extends Component {
             })
             .catch(error => console.log(error));
     }
+
+    updateSearchInput = (searchTerm) => 
+        this.setState({searchTerm})
+    
 
     render() {
         const { orders } = this.state;
@@ -67,7 +73,10 @@ class Reporting extends Component {
         return (
             <div className="sparkReporting">
                 <h1>IngramSpark Reporting</h1>
-                <h3>Search Placeholder</h3>
+                <Search
+                    onSearch={this.updateSearchInput}
+                    searchTerm={this.state.searchTerm}
+                />                   
 
                 <div className="panel panel-primary">
                     <div className="panel-heading">Promotions</div>
