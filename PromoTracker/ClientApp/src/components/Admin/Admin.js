@@ -98,16 +98,11 @@ class Admin extends React.Component {
             });
     }
 
-    handleUpdate(id, promo) {
+    handleUpdate(id, updatePromo) {
         PromoRequests
-            .updatePromo(id, promo)
+            .updatePromo(id, updatePromo)
             .then(() => {
-                alert("Updated!");
-                this.setState({
-                    updatePromo: {
-
-                    }
-                });
+                alert("Updated!");               
                 this.closeEditModal();
                 this.getPromos();
             })
