@@ -1,25 +1,21 @@
 ﻿import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter, DatePicker } from 'react-bootstrap';
 
-class AddUpdateModal extends Component {
+class EditModal extends Component {
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            promo: []
+            promo: props.promo
+        };
 
-        }
     }
-    componentDidMount() {
-
-        this.setState({ promo: this.props.promo });
-    }
-
+    
     handleNameChange = (e) => {
         const addPromo = { ...this.state.promo };
         addPromo.name = e.target.value;
         this.setState({ promo: addPromo });
-    };
+    }
 
     handleStartChange = (e) => {
         const addPromo = { ...this.state.promo };
@@ -52,20 +48,20 @@ class AddUpdateModal extends Component {
     };
 
     render() {
-
+        const { promo } = this.state;
 
         return (
 
             <Modal show={this.props.show} onHide={this.props.hide}>
                 <ModalHeader closeButton>
-                    <ModalTitle className="text-center">Add Promotion</ModalTitle>
+                    <ModalTitle className="text-center">Update Details</ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                     <label> Promotion Name: </label>
                     <input
                         type="text"
                         name="name"
-                        value={this.state.promo.name}
+                        value={promo.name}
                         onChange={this.handleNameChange}
                     />
                     <br />
@@ -73,7 +69,7 @@ class AddUpdateModal extends Component {
                     <input
                         type="date"
                         name="start"
-                        value={this.state.promo.start}
+                        value={promo.start}
                         onChange={this.handleStartChange}
 
                     />
@@ -82,7 +78,7 @@ class AddUpdateModal extends Component {
                     <input
                         type="date"
                         name="end"
-                        value={this.state.promo.end}
+                        value={promo.end}
                         onChange={this.handleEndChange}
 
                     />
@@ -91,7 +87,7 @@ class AddUpdateModal extends Component {
                     <input
                         type="text"
                         name="desc"
-                        value={this.state.promo.desc}
+                        value={promo.desc}
                         onChange={this.handleDescChange}
 
                     />
@@ -100,7 +96,7 @@ class AddUpdateModal extends Component {
                     <input
                         type="text"
                         name="category"
-                        value={this.state.promo.category}
+                        value={promo.category}
                         onChange={this.handleCategoryChange}
 
                     />
@@ -109,13 +105,13 @@ class AddUpdateModal extends Component {
                     <input
                         type="text"
                         name="restrictions"
-                        value={this.state.promo.restrictions}
+                        value={promo.restrictions}
                         onChange={this.handleRestrictionChange}
 
                     />
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => this.props.save(this.state.promo)}>Save</Button>
+                    <Button onClick={() => this.props.save(promo.id, promo)}>Save</Button>
                     <Button onClick={this.props.hide}>Cancel</Button>
                 </ModalFooter>
             </Modal>
@@ -123,4 +119,4 @@ class AddUpdateModal extends Component {
     }
 }
 
-export default AddUpdateModal; 
+export default EditModal; 

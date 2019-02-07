@@ -1,22 +1,26 @@
 ﻿import React from 'react';
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
-import AddUpdateModal from './../Modals/AddUpdateModal';
+import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 
 import './Admin.css';
+import EditModal from '../Modals/EditModal';
 
 class Admin extends React.Component {
     constructor(props, context) {
         super(props, context);
 
 
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.openAddModal = this.openAddModal.bind(this);
+        this.closeAddModal = this.closeAddModal.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.getPromos = this.getPromos.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.clearInput = this.clearInput.bind(this);
-
+        this.openEditModal = this.openEditModal.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        
         this.state = {
             promos: [],
             addPromo: {
@@ -27,7 +31,11 @@ class Admin extends React.Component {
                 category: "",
                 restrictions: ""
             },
-            isAddModalOpen: false
+            updatePromo: {
+                
+            },
+            isAddModalOpen: false,
+            isEditModalOpen: false
         };
     }
 
@@ -46,12 +54,20 @@ class Admin extends React.Component {
             .catch(error => console.log(error));
     }
 
-    openModal() {
+    openAddModal() {
         this.setState({ isAddModalOpen: true });
     }
 
-    closeModal() {
+    openEditModal(promo) {
+        this.setState({ isEditModalOpen: true, updatePromo: promo });
+    }
+
+    closeAddModal() {
         this.setState({ isAddModalOpen: false });
+    }
+
+    closeEditModal() {
+        this.setState({ isEditModalOpen: false });
     }
 
     clearInput() {
@@ -73,12 +89,25 @@ class Admin extends React.Component {
                         restrictions: ""
                     }
                 });
-                this.closeModal();
+                this.closeAddModal();
                 this.getPromos();
                 this.clearInput();
             })
             .catch((error) => {
                 console.error(error, "error adding promotion");
+            });
+    }
+
+    handleUpdate(id, promo) {
+        PromoRequests
+            .updatePromo(id, promo)
+            .then(() => {
+                alert("Updated!");               
+                this.closeEditModal();
+                this.getPromos();
+            })
+            .catch((error) => {
+                console.error(error, "error updating promotion");
             });
     }
 
@@ -98,23 +127,30 @@ class Admin extends React.Component {
 
         const { promos } = this.state;
 
-        const promoComponents = promos.map((promo) => (          
-                        <tr key={promo.id}>
-                            <td>{promo.name}</td>
-                            <td>{promo.start}</td>
-                            <td>{promo.end}</td>
-                            <td>{promo.desc}</td>
-                            <td>{promo.category}</td>
-                            <td>{promo.restrictions}</td>
-                            <td>
-                                <Button>Edit</Button>
-                            </td>
-                            <td>
-                                <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
-                            </td>
+        const promoComponents = promos.map((promo) => (
+            <tr key={promo.id}>
+                <td>{promo.name}</td>
+                <td>{promo.start}</td>
+                <td>{promo.end}</td>
+                <td>{promo.desc}</td>
+                <td>{promo.category}</td>
+                <td>{promo.restrictions}</td>
+                <td>
+                    <Button id={promo.id} onClick={() => this.openEditModal(promo)}>Edit</Button>
+                </td>
+                <td>
+                    <Button onClick={() => this.handleDelete(promo)}>Delete</Button>
+                </td>
 
-                        </tr>
-         ));
+            </tr>
+        ));
+        const editModal = this.state.isEditModalOpen &&
+            (<EditModal
+                show={this.state.isEditModalOpen}
+                hide={this.closeEditModal}
+                save={this.handleUpdate}
+                promo={this.state.updatePromo}
+            />);
 
         return (
             <div>
@@ -122,14 +158,16 @@ class Admin extends React.Component {
                     <h1>Admin</h1>
                 </div>
 
-                <Button onClick={this.openModal}>Add Promotion</Button>
+                <Button onClick={this.openAddModal}>Add Promotion</Button>
 
-                <AddUpdateModal
+                <AddModal
                     show={this.state.isAddModalOpen}
-                    hide={this.closeModal}
+                    hide={this.closeAddModal}
                     save={this.handleAdd}
                     promo={this.state.addPromo}
                 />
+
+                {editModal}
 
                 <div className="promotions">
                     <div className="panel panel-primary">
@@ -154,7 +192,7 @@ class Admin extends React.Component {
                             </Table>
                         </div>
                     </div>
-                </div>               
+                </div>
             </div>
         );
     }

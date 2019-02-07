@@ -1,8 +1,25 @@
-﻿import React from 'react';
+﻿import React, { Component } from 'react';
+import OrderRequests from './../Requests/OrderRequests';
+import { Table } from 'react-bootstrap';
 
 import './SparkReporting.css';
 
-class Reporting extends React.Component {
+class Reporting extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            orders: []
+        }
+    }
+
+    componentDidMount() {
+        OrderRequests
+            .getOrders()
+            .then(orders => {
+
+            })
+    }
     render() {
         return (
             <div className="sparkReporting">

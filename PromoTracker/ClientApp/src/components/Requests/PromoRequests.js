@@ -41,5 +41,15 @@ const deletePromo = (input) => {
     });
 };
 
+const updatePromo = (id, input) => {
+    const apiPath = `api/promo/${id}`;
+    return new Promise((resolve, reject) => {
+        axios
+            .put(apiPath, input)
+            .then(promo => resolve(promo))
+            .catch(error => reject(error));
+    });
+};
 
-export default { getPromos, newPromo, deletePromo, getPromoById };
+
+export default { getPromos, newPromo, deletePromo, getPromoById, updatePromo };
