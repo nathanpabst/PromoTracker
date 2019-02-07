@@ -111,7 +111,7 @@ class EditModal extends Component {
                     />
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => this.props.handleUpdate(promo.id, promo)}>Save</Button>
+                    <Button onClick={() => this.props.save(promo.id, promo)}>Save</Button>
                     <Button onClick={this.props.hide}>Cancel</Button>
                 </ModalFooter>
             </Modal>

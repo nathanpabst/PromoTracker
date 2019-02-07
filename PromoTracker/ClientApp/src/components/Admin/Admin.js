@@ -98,9 +98,9 @@ class Admin extends React.Component {
             });
     }
 
-    handleUpdate(id, updatePromo) {
+    handleUpdate(id, promo) {
         PromoRequests
-            .updatePromo(id, updatePromo)
+            .updatePromo(id, promo)
             .then(() => {
                 alert("Updated!");               
                 this.closeEditModal();
