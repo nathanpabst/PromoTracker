@@ -11,6 +11,16 @@ const getPromos = () => {
     });
 };
 
+const getTitleCountWithPromo = () => {
+    const apiPath = `api/promo/titles`;
+    return new Promise((resolve, reject) => {
+        axios
+            .get(apiPath)
+            .then(titles => resolve(titles))
+            .catch(error => reject(error));
+    });
+};
+
 const getPromoById = (input) => {
     const apiPath = `api/promo/${input}`;
     return new Promise((resolve, reject) => {
@@ -52,4 +62,4 @@ const updatePromo = (id, input) => {
 };
 
 
-export default { getPromos, newPromo, deletePromo, getPromoById, updatePromo };
+export default { getPromos, getTitleCountWithPromo, newPromo, deletePromo, getPromoById, updatePromo };

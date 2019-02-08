@@ -32,6 +32,21 @@ namespace PromoTracker.DataAccess
             }
         }
 
+        public IEnumerable<TitleCountWithPromo> GetAggregatedTitleData()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<TitleCountWithPromo>(@"SELECT COUNT(DISTINCT (b.id)) AS TitleCount,
+                                                                        p.name AS PromotionName
+                                                                    FROM [dbo].[book] AS b
+                                                                    LEFT JOIN promotion AS p ON b.promoId = p.id
+                                                                    GROUP BY p.name");
+
+                return result;
+            }
+        }
+
         public bool PostPromo(Promotion promotion)
         {
             using (var connection = new SqlConnection(ConnectionString))
