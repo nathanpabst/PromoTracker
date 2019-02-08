@@ -2,7 +2,7 @@
 import PromoRequests from './../Requests/PromoRequests';
 import Search from './../Search/Search';
 import PromoViewModal from './../Modals/PromoViewModal';
-import { Table, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 import './IngramSpark.css';
 

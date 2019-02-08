@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalTitle, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 
@@ -154,10 +154,7 @@ class Admin extends React.Component {
 
         return (
             <div>
-                <div>
-                    <h1>Admin</h1>
-                </div>
-
+                
                 <Button onClick={this.openAddModal}>Add Promotion</Button>
 
                 <AddModal
@@ -173,7 +170,7 @@ class Admin extends React.Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <Table striped bordered hover size="sm">
+                            <Table striped bordered hover able-responsive size="sm">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
