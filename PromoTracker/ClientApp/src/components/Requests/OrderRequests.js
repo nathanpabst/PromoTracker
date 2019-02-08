@@ -1,6 +1,6 @@
 ﻿import axios from 'axios';
 
-const getOrders = () => {
+const GetAggregatedOrderData = () => {
     const apiPath = `api/order`;
     return new Promise((resolve, reject) => {
         axios
@@ -10,4 +10,4 @@ const getOrders = () => {
     });
 };
 
-export default { getOrders };
+export default { GetAggregatedOrderData };

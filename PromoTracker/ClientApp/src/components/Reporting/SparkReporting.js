@@ -1,10 +1,9 @@
 ﻿import React, { Component } from 'react';
 import OrderRequests from './../Requests/OrderRequests';
-import { Table, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import Search from './../Search/Search';
 
 import './SparkReporting.css';
-import PromoRequests from '../Requests/PromoRequests';
 
 class Reporting extends Component {
     constructor(props) {
@@ -12,28 +11,19 @@ class Reporting extends Component {
 
         this.state = {
             orders: [],
-            promos: [],
             searchTerm: ''
         };
     }
 
     componentDidMount() {
         OrderRequests
-            .getOrders()
+            .GetAggregatedOrderData()
             .then(orders => {
                 this.setState({
                     orders: orders.data
                 });
             })
-            .catch(error => console.log(error));
-        PromoRequests
-            .getPromos()
-            .then(promos => {
-                this.setState({
-                    promos: promos.data
-                });
-            })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error));      
     }
 
     updateSearchInput = (searchTerm) => 
@@ -44,69 +34,28 @@ class Reporting extends Component {
         const { orders } = this.state;
 
         const orderComponents = orders.map((order) => (
-            <tr key={order.id}>
-                <td>{order.orderNumber}</td>
-                <td>{order.bookId}</td>
-                <td>{order.orderDate}</td>
-                <td>{order.quantity}</td>
-                <td>{order.orderTypeId}</td>
-                <td>{order.printFee}</td>
+            <tr>
+                <td>{order.name}</td>
+                <td>{order.unitsShipped}</td>
+                <td>{order.printFees}</td>
             </tr>
         ));
-
-        const { promos } = this.state;
-
-        const promoComponents = promos.map((promo) => (
-            <tr key={promo.id}>
-                <td>{promo.name}</td>
-                <td>
-                    <Button
-                        
-                    >
-                        View
-                    </Button>
-                </td>
-            </tr>
-        ));
-
-        
+               
         return (
             <div className="sparkReporting">
-                <h1>IngramSpark Reporting</h1>
                 <Search
                     onSearch={this.updateSearchInput}
                     searchTerm={this.state.searchTerm}
                 />                   
 
                 <div className="panel panel-primary">
-                    <div className="panel-heading">Promotions</div>
+                    <div className="panel-heading">Orders</div>
                     <div className="panel-body">
                         <Table striped bordered hover size="sm">
                             <thead>
                                 <tr>
                                     <th>Promotion Name</th>
-                                    <th>Results</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {promoComponents}
-                            </tbody>
-                        </Table>
-                    </div>
-                </div>
-
-
-                <div className="panel panel-primary">
-                    <div className="panel-heading"> Orders </div>
-                    <div className="panel-body">
-                        <Table striped bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                    <th>Order Number</th>
-                                    <th>Book Id</th>
-                                    <th>Order Date</th>
-                                    <th>Quantity</th>
-                                    <th>Order Type Id</th>
+                                    <th>Units Shipped</th>
                                     <th>Print Fees</th>
                                 </tr>
                             </thead>
@@ -116,6 +65,7 @@ class Reporting extends Component {
                         </Table>
                     </div>
                 </div>
+                
             </div>
 
             );

@@ -27,14 +27,6 @@ namespace PromoTracker.Controllers
             var orderDataList = _orders.GetAggregatedOrderData();
             return Ok(orderDataList);
         }
-
-        [HttpGet]
-        public IActionResult GetOrders()
-        {
-            var orderList = _orders.GetOrders();
-            return Ok(orderList);
-        }
-
         
     }
 }

@@ -34,17 +34,6 @@ namespace PromoTracker.DataAccess
                 return result.ToList();
             }
         }
-
-        public IEnumerable<Order> GetOrders()
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var result = connection.Query<Order>(@"SELECT * FROM [dbo].[order]");
-                return result;
-            }
-        }
-
         
     }
 }
