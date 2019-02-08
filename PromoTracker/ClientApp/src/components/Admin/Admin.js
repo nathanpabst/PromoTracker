@@ -170,7 +170,7 @@ class Admin extends React.Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <Table striped bordered hover able-responsive size="sm">
+                            <Table striped bordered hover size="sm">
                                 <thead>
                                     <tr>
                                         <th>Name</th>

@@ -28,6 +28,13 @@ namespace PromoTracker.Controllers
             return Ok(promoList);
         }
 
+        [HttpGet("titles")]
+        public IActionResult GetAggregatedTitleData()
+        {
+            var titleCount = _promos.GetAggregatedTitleData();
+            return Ok(titleCount);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetPromoById(int id)
         {

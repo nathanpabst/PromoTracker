@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 import Search from './../Search/Search';
 
 import './SparkReporting.css';
+import PromoRequests from '../Requests/PromoRequests';
 
 class Reporting extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Reporting extends Component {
 
         this.state = {
             orders: [],
+            titles: [],
             searchTerm: ''
         };
     }
@@ -23,8 +25,18 @@ class Reporting extends Component {
                     orders: orders.data
                 });
             })
-            .catch(error => console.log(error));      
+            .catch(error => console.log(error)); 
+
+        PromoRequests
+            .getTitleCountWithPromo()
+            .then(titles => {
+                this.setState({
+                    titles: titles.data
+                });
+            })
+            .catch(error => console.log(error));
     }
+
 
     updateSearchInput = (searchTerm) => 
         this.setState({searchTerm})
@@ -33,11 +45,20 @@ class Reporting extends Component {
     render() {
         const { orders } = this.state;
 
+        const { titles } = this.state;
+
         const orderComponents = orders.map((order, index) => (
             <tr key={index}>
                 <td>{order.name}</td>
                 <td>{order.unitsShipped}</td>
                 <td>{order.printFees}</td>
+            </tr>
+        ));
+
+        const titleComponents = titles.map((title, index) => (
+            <tr key={index}>
+                <td>{title.promotionName}</td>
+                <td>{title.titleCount}</td>
             </tr>
         ));
                
@@ -61,6 +82,23 @@ class Reporting extends Component {
                             </thead>
                             <tbody>
                                 {orderComponents}
+                            </tbody>
+                        </Table>
+                    </div>
+                </div>
+
+                <div className="panel panel-primary">
+                    <div className="panel-heading">Title Counts</div>
+                    <div className="panel-body">
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Promotion Name</th>
+                                    <th>Title Additions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {titleComponents}
                             </tbody>
                         </Table>
                     </div>
