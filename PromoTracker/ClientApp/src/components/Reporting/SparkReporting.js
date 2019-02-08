@@ -33,8 +33,8 @@ class Reporting extends Component {
     render() {
         const { orders } = this.state;
 
-        const orderComponents = orders.map((order) => (
-            <tr>
+        const orderComponents = orders.map((order, index) => (
+            <tr key={index}>
                 <td>{order.name}</td>
                 <td>{order.unitsShipped}</td>
                 <td>{order.printFees}</td>
