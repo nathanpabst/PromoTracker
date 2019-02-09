@@ -78,7 +78,7 @@ class Admin extends React.Component {
         PromoRequests
             .newPromo(promo)
             .then(() => {
-                alert("Added!");
+                alert("Updated!");               
                 this.setState({
                     addPromo: {
                         name: "",
