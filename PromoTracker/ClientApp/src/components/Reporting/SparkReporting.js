@@ -2,7 +2,7 @@
 //import OrderRequests from './../Requests/OrderRequests';
 //import { Table } from 'react-bootstrap';
 //import Search from './../Search/Search';
-import ChartTitleCount from './../Charts/ChartTitleCount';
+import Chart from './../Charts/Chart';
 import PromoRequests from '../Requests/PromoRequests';
 
 import './SparkReporting.css';
@@ -25,6 +25,7 @@ class Reporting extends Component {
             .then(chartData => {
                 this.setState({
                     chartData: chartData.data
+                    //or chartData: {value: [], name:[]}
                 });
             })
             .catch(error => console.log(error));
@@ -44,7 +45,7 @@ class Reporting extends Component {
         return (
             <div className="sparkReporting">             
                 <div className="titleCountChart">
-                    <ChartTitleCount 
+                    <Chart 
                         chartData={this.state.chartData}
                     />;
                 </div>                                                              
