@@ -7,8 +7,7 @@ class AddModal extends Component {
 
         this.state = {
             promo: []
-
-        }
+        };
     }
     componentDidMount() {
 
@@ -116,6 +115,7 @@ class AddModal extends Component {
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={() => this.props.save(this.state.promo)}>Save</Button>
+                    
                     <Button onClick={this.props.hide}>Cancel</Button>
                 </ModalFooter>
             </Modal>

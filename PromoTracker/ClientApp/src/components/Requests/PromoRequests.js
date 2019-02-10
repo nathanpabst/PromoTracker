@@ -1,5 +1,4 @@
 ﻿import axios from 'axios';
-//import register from '../../registerServiceWorker';
 
 const getPromos = () => {
     const apiPath = `api/promo`;
