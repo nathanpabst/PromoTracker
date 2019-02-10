@@ -5,7 +5,6 @@ import Admin from './components/Admin/Admin';
 import IngramSpark from './components/IngramSpark/IngramSpark';
 import SparkReporting from './components/Reporting/SparkReporting';
 import Search from './components/Search/Search';
-import Chart from './components/Charts/Chart';
 
 class App extends Component {
   //displayName = App.name
@@ -21,7 +20,6 @@ class App extends Component {
                         <Route path="/admin" exact component={Admin} />
                         <Route path="/ingramspark" exact component={IngramSpark} />
                         <Route path="/sparkReporting" exact component={SparkReporting} />
-                        <Route path="/chart" exact component={Chart} />
                         <Route path="/search" exact component={Search} />
                         
                     </Switch>
