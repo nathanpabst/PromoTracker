@@ -1,62 +1,44 @@
 ﻿import React, { Component } from 'react';
-//import OrderRequests from './../Requests/OrderRequests';
-//import { Table } from 'react-bootstrap';
-//import Search from './../Search/Search';
-import Chart from './../Charts/Chart';
-import PromoRequests from '../Requests/PromoRequests';
-
+//import Chart from './../Charts/Chart';
+//import PromoRequests from '../Requests/PromoRequests';
+import { Bar } from 'britecharts-react';
 import './SparkReporting.css';
 
 class Reporting extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            chartData: {}
-        };
-    }
-    componentWillMount() {
-        this.getChartData();
-    }  
-
-    getChartData() {
-        PromoRequests
-            .getTitleCountWithPromo()
-            .then(chartData => {
-                this.setState({
-                    chartData: chartData.data                   
-                });
-            })
-            .catch(error => console.log(error));
-    }
+    
 
     render() {
-        const { chartData } = this.state;
+        const barData = [
+            {
+                value: 5000,
+                name: 'FREEBOOK'
+            },
+            {
+                value: 10000,
+                name: 'GETSTARTED'
+            },
+            {
+                value: 8500,
+                name: 'NANO'
+            }
+        ];
+        const marginObject = {
+            left: 40,
+            right: 40,
+            top: 40,
+            bottom: 40,
+        };
 
-        //const { data } = this.state.chartData && (
-        //    <Chart
-        //        chartData={this.state.chartData}
-        //    />);
+        return(
+            <Bar
+                data={barData}
+                width={400}
+                isHorizontal={false}
+                margin={marginObject}
+            />
+        );
+           
         
-        //const data = titles.map((title) =>
-        //    (return
-        //{
-        //    {
-        //        name: title.promotionName
-        //        value: title.titleCount
-        //    }
-        //}));
-             
-        return (
-            <div className="sparkReporting">             
-                <div className="titleCountChart">
-                    Chart Component
-                    <Chart
-                        chartData={this.state.chartData}
-                    />
-                </div>                                                              
-            </div>
-            );
     }
 }
 
