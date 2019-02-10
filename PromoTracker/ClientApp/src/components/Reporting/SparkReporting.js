@@ -12,7 +12,7 @@ class Reporting extends Component {
         super(props);
 
         this.state = {
-            chartData: props.chartData
+            chartData: {}
         };
     }
     componentWillMount() {
@@ -24,16 +24,21 @@ class Reporting extends Component {
             .getTitleCountWithPromo()
             .then(chartData => {
                 this.setState({
-                    chartData: chartData.data
-                    //or chartData: {value: [], name:[]}
+                    chartData: chartData.data                   
                 });
             })
             .catch(error => console.log(error));
     }
 
     render() {
+        const { chartData } = this.state;
 
-        //const chartData = titles.map((title) =>
+        //const { data } = this.state.chartData && (
+        //    <Chart
+        //        chartData={this.state.chartData}
+        //    />);
+        
+        //const data = titles.map((title) =>
         //    (return
         //{
         //    {
@@ -45,9 +50,10 @@ class Reporting extends Component {
         return (
             <div className="sparkReporting">             
                 <div className="titleCountChart">
-                    <Chart 
+                    Chart Component
+                    <Chart
                         chartData={this.state.chartData}
-                    />;
+                    />
                 </div>                                                              
             </div>
             );
