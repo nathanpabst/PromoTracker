@@ -47,7 +47,7 @@ class IngramSpark extends Component {
                 <td>{promo.end}</td>
                 <td>
                     <Button
-                        variant="primary"
+                        bsStyle="primary"
                         size="sm"
                         value={promo.id}
                         onClick={() => this.openModal(promo)}
@@ -69,7 +69,7 @@ class IngramSpark extends Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <Table striped bordered hover size="sm">
+                            <Table striped bordered hover size="lg">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
