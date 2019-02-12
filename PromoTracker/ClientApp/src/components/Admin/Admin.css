@@ -1,4 +1,9 @@
 ﻿body {
     background-color: white;
+}
 
+.addPromotion {
+    padding: 15px;
+    margin: 10px;
+    /*float: right;*/
 }

@@ -15,12 +15,12 @@ class NavBar extends React.Component {
                     <Navbar.Brand className="navbar-brand">
                         <Link to="/">Promo Code Tracker</Link>
                     </Navbar.Brand>
-                    <Navbar.Toggle  />
+                    <Navbar.Toggle className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
                     </Navbar.Header>
-                </div>
+                
 
-                <Navbar.Collapse >
-                    <Nav >                       
+                <Navbar.Collapse>
+                    <Nav className="nav navbar-nav navbar-right">                       
                         <LinkContainer to="/ingramspark">
                             <NavItem href="/ingramspark">
                                 IngramSpark
@@ -39,6 +39,8 @@ class NavBar extends React.Component {
 
                     </Nav>
                 </Navbar.Collapse>
+                </div>
+
             </Navbar>
         );
     }
