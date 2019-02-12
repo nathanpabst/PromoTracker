@@ -23,13 +23,21 @@ namespace PromoTracker.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<OrdersWithPromo>(@"SELECT SUM(printFee) AS PrintFees,
-                                                                    SUM(quantity) AS UnitsShipped,
-                                                                    p.name AS Name
+                var result = connection.Query<OrdersWithPromo>(@"SELECT SUM(printFee) AS [value],
+		                                                             p.name AS [group],
+		                                                            'Print Fees' as [name]
                                                                 FROM [dbo].[order] AS o
-                                                                    LEFT JOIN book AS b ON o.id = b.id
-                                                                    LEFT JOIN promotion AS p ON b.promoId = p.id
-                                                                GROUP BY p.name"                   
+                                                                LEFT JOIN book AS b ON o.id = b.id
+                                                                LEFT JOIN promotion AS p ON b.promoId = p.id
+                                                                GROUP BY p.name
+                                                                UNION
+                                                                SELECT SUM(o.quantity) AS [value],
+		                                                            p.name AS [group],
+		                                                            'Units Shipped' as [name]
+                                                                FROM [dbo].[order] AS o
+                                                                LEFT JOIN book AS b ON o.id = b.id
+                                                                LEFT JOIN promotion AS p ON b.promoId = p.id
+                                                                GROUP BY p.name"
                                                                 );
                 return result.ToList();
             }

@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
-//import Chart from './../Charts/Chart';
 import PromoRequests from '../Requests/PromoRequests';
-import { Bar } from 'britecharts-react';
+import OrderRequests from '../Requests/OrderRequests';
+import { Bar, GroupedBar } from 'britecharts-react';
 import colors from 'britecharts/dist/umd/colors.min';
 
 import './SparkReporting.css';
@@ -11,13 +11,27 @@ class Reporting extends Component {
         super(props);
 
         this.state = {
-            barData: []
+            barData: [],
+            groupedBarData: []
             
         };
     }
 
     componentDidMount() {
         this.getBarData();
+        this.getGroupedBarData();
+    }
+
+    getGroupedBarData() {
+        OrderRequests
+            .GetAggregatedOrderData()
+            .then(groupedBarData => {
+                
+                this.setState({
+                    groupedBarData: groupedBarData.data
+                });
+            })
+            .catch(error => console.log(error));
     }
 
     getBarData() {
@@ -40,21 +54,8 @@ class Reporting extends Component {
 
     render() {
         const { barData } = this.state;
+        const { groupedBarData } = this.state;
 
-        //const barData = [
-        //    {
-        //        value: 5000,
-        //        name: 'FREEBOOK'
-        //    },
-        //    {
-        //        value: 10000,
-        //        name: 'GETSTARTED'
-        //    },
-        //    {
-        //        value: 8500,
-        //        name: 'NANO'
-        //    }
-        //];
         const marginObject = {
             left: 40,
             right: 40,
@@ -63,16 +64,21 @@ class Reporting extends Component {
         };
 
         return (
-            <Bar
+            [<Bar
                 data={barData}
-                width={400}
+                width={500}
                 isHorizontal={false}
                 margin={marginObject}
-            />
+            />,
+
+            <GroupedBar
+                data={groupedBarData}
+                isHorizontal={true}
+                width={500}
+                height={500}
+            />]
             
-        );
-           
-        
+        );       
     }
 }
 

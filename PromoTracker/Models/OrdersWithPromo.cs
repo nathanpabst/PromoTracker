@@ -8,7 +8,9 @@ namespace PromoTracker.Models
     public class OrdersWithPromo
     {
         public string Name { get; set; }
-        public long PrintFees { get; set; }
-        public long UnitsShipped { get; set; }
+        public string Group { get; set; }
+        public string Value { get; set; }
+        //public long PrintFees { get; set; }
+        //public long UnitsShipped { get; set; }
     }
 }
