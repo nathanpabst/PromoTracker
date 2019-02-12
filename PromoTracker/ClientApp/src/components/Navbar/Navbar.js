@@ -3,21 +3,24 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import './Navbar.scss';
+import './Navbar.css';
 
 class NavBar extends React.Component {
     render() {
 
         return (
-            <Navbar inverse collapseOnSelect>
+            <Navbar inverse collapseOnSelect bg="dark" >
+                <div className="container-fluid">
                 <Navbar.Header>
                     <Navbar.Brand className="navbar-brand">
                         <Link to="/">Promo Code Tracker</Link>
                     </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
+                    <Navbar.Toggle className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
+                    </Navbar.Header>
+                
+
                 <Navbar.Collapse>
-                    <Nav>                       
+                    <Nav className="nav navbar-nav navbar-right">                       
                         <LinkContainer to="/ingramspark">
                             <NavItem href="/ingramspark">
                                 IngramSpark
@@ -36,6 +39,8 @@ class NavBar extends React.Component {
 
                     </Nav>
                 </Navbar.Collapse>
+                </div>
+
             </Navbar>
         );
     }

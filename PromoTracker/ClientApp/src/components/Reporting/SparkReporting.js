@@ -24,39 +24,37 @@ class Reporting extends Component {
         PromoRequests
             .getTitleCountWithPromo()
             .then(barData => {
+                let data = barData.data.map((promo) => {
+                    return {
+                        name: promo.promotionName,
+                        value: promo.titleCount
+                    };
+                });
+
                 this.setState({
-                    barData: {
-                        value: barData.titleCount,
-                        name: barData.promotionName
-                    }
+                    barData: data
                 });
             })
             .catch(error => console.log(error));
     }
 
     render() {
-        //const { barData } = this.state;
-        //const dataArray = barData.map(([name, value]) => {
-        //    return {
-        //        name: name.promotionName,
-        //        value: value.titleCount
-        //    };
-        //});
+        const { barData } = this.state;
 
-        const barData = [
-            {
-                value: 5000,
-                name: 'FREEBOOK'
-            },
-            {
-                value: 10000,
-                name: 'GETSTARTED'
-            },
-            {
-                value: 8500,
-                name: 'NANO'
-            }
-        ];
+        //const barData = [
+        //    {
+        //        value: 5000,
+        //        name: 'FREEBOOK'
+        //    },
+        //    {
+        //        value: 10000,
+        //        name: 'GETSTARTED'
+        //    },
+        //    {
+        //        value: 8500,
+        //        name: 'NANO'
+        //    }
+        //];
         const marginObject = {
             left: 40,
             right: 40,

@@ -154,8 +154,10 @@ class Admin extends React.Component {
 
         return (
             <div>
-                
-                <Button onClick={this.openAddModal}>Add Promotion</Button>
+                <div className="addPromotion">
+                    <Button variant="success" size="lg" onClick={this.openAddModal}>Add Promotion</Button>
+                </div>
+
 
                 <AddModal
                     show={this.state.isAddModalOpen}
@@ -163,6 +165,8 @@ class Admin extends React.Component {
                     save={this.handleAdd}
                     promo={this.state.addPromo}
                 />
+
+
 
                 {editModal}
 
