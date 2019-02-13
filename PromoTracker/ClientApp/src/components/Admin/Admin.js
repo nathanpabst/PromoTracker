@@ -2,6 +2,7 @@
 import { Button, Table } from 'react-bootstrap';
 import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
+import Moment from 'react-moment';
 
 import './Admin.css';
 import EditModal from '../Modals/EditModal';
@@ -130,8 +131,8 @@ class Admin extends React.Component {
         const promoComponents = promos.map((promo) => (
             <tr key={promo.id}>
                 <td>{promo.name}</td>
-                <td>{promo.start}</td>
-                <td>{promo.end}</td>
+                <td><Moment format="MM/DD/YYYY">{promo.start}</Moment></td>
+                <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
                 <td>{promo.desc}</td>
                 <td>{promo.category}</td>
                 <td>{promo.restrictions}</td>
