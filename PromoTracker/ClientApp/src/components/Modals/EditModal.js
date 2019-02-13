@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter, DatePicker } from 'react-bootstrap';
+import * as moment from 'moment';
 
 class EditModal extends Component {
     constructor(props, context) {
@@ -49,6 +50,8 @@ class EditModal extends Component {
 
     render() {
         const { promo } = this.state;
+        promo.start = moment(promo.start).format("YYYY-MM-DD");
+        promo.end = moment(promo.end).format("YYYY-MM-DD");
 
         return (
 
