@@ -2,6 +2,7 @@
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
 import { Table, Button } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 import './IngramSpark.css';
 
@@ -43,7 +44,7 @@ class IngramSpark extends Component {
         const promoComponents = promos.map((promo) => (
             <tr key={promo.id}>
                 <td>{promo.name}</td>
-                <td>{promo.end}</td>
+                <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
                 <td>
                     <Button
                         bsStyle="primary"
