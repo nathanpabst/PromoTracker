@@ -64,20 +64,25 @@ class Reporting extends Component {
         };
 
         return (
-            [<Bar
-                data={barData}
-                width={500}
-                isHorizontal={false}
-                margin={marginObject}
-            />,
+            <div>
+                <h2> Title Additions</h2>,
 
+                <Bar
+                    data={barData}
+                    width={1000}
+                    isHorizontal={false}
+                    margin={marginObject}
+                 />,
+
+            <h2> Units Shipped & Print Fees</h2>,
             <GroupedBar
                 data={groupedBarData}
                 isHorizontal={true}
                 width={500}
                 height={500}
-            />]
-            
+            />
+    
+            </div>
         );       
     }
 }
