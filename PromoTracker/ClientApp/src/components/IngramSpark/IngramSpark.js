@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
-import Search from './../Search/Search';
 import PromoViewModal from './../Modals/PromoViewModal';
 import { Table, Button } from 'react-bootstrap';
 
@@ -60,11 +59,7 @@ class IngramSpark extends Component {
 
         return (
             <div className="spark" >
-
-                <div className="search">
-                    <Search />
-                </div>
-
+               
                 <div className="promotions">
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
@@ -90,7 +85,6 @@ class IngramSpark extends Component {
                     hide={this.closeModal}
                     promo={this.state.singlePromo}
                 />
-
 
             </div>
 
