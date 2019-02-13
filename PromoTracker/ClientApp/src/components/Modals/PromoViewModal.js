@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 class PromoViewModal extends Component {
     render() {
@@ -10,9 +11,9 @@ class PromoViewModal extends Component {
                     <ModalTitle>{this.props.promo.name}</ModalTitle>
                 </ModalHeader>
                 <ModalBody>
-                    <p>Start Date: {this.props.promo.start}</p>
+                    <p>Start Date: <Moment format="MM/DD/YYYY">{this.props.promo.start}</Moment> </p>
                     <br />
-                    <p>End Date: {this.props.promo.end}</p> <br />
+                    <p>End Date: <Moment format="MM/DD/YYYY">{this.props.promo.end}</Moment></p> <br />
                     <p>Description: {this.props.promo.desc}</p> <br />
                     <p>Restrictions: {this.props.promo.restrictions}</p> <br />
                     <p>Category: {this.props.promo.category}</p>
