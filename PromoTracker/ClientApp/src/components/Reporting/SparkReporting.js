@@ -2,7 +2,6 @@
 import PromoRequests from '../Requests/PromoRequests';
 import OrderRequests from '../Requests/OrderRequests';
 import { Bar, GroupedBar } from 'britecharts-react';
-import colors from 'britecharts/dist/umd/colors.min';
 
 import './SparkReporting.css';
 

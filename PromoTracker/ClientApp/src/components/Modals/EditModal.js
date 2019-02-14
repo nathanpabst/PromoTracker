@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter, DatePicker } from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap';
 import * as moment from 'moment';
 
 class EditModal extends Component {
