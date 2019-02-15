@@ -13,7 +13,7 @@ class NavBar extends React.Component {
                 <div className="container-fluid">
                 <Navbar.Header>
                     <Navbar.Brand className="navbar-brand">
-                        <Link to="/">Promo Code Tracker</Link>
+                        <Link to="/">PromoTracker</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
                     </Navbar.Header>
@@ -21,9 +21,9 @@ class NavBar extends React.Component {
 
                 <Navbar.Collapse>
                     <Nav className="nav navbar-nav navbar-right">                       
-                        <LinkContainer to="/ingramspark">
-                            <NavItem href="/ingramspark">
-                                IngramSpark
+                        <LinkContainer to="/bookSpark">
+                            <NavItem href="/bookSpark">
+                                Spark
                             </NavItem>
                         </LinkContainer>
                         <LinkContainer to="/sparkReporting">

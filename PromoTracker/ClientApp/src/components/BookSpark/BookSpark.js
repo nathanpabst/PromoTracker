@@ -4,9 +4,9 @@ import PromoViewModal from './../Modals/PromoViewModal';
 import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 
-import './IngramSpark.css';
+import './BookSpark.css';
 
-class IngramSpark extends Component {
+class BookSpark extends Component {
     constructor(props) {
         super(props);
 
@@ -94,4 +94,4 @@ class IngramSpark extends Component {
 
 }
 
-export default IngramSpark;
+export default BookSpark;
