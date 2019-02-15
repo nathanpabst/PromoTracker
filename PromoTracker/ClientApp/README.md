@@ -28,7 +28,7 @@ Create a Browser Rich Application that demonstrates proficiency in the following
 ---
 ### Screenshots
 ###### Description: Spark page
-<img src="https://raw.githubusercontent.com/nathanpabst/gameday-nashville/14b93dd1b85c3aae739ba71b31c8bc013ef9190e/screenshots/Screen%20Shot%202018-08-07%20at%206.20.07%20PM.png">
+<img src="https://raw.githubusercontent.com/nathanpabst/PromoTracker/116b5829cfb6da1e3c7b0bbcc6404895cff292bb/PromoTracker/Screenshots/Spark.PNG">
 
 ###### Description: SparkPromoViewModal 
 <img src="https://raw.githubusercontent.com/nathanpabst/PromoTracker/10b01cc9ba95b6dc8f8887966b0caeceb7b6abee/PromoTracker/Screenshots/AdminEditModal.PNG">
