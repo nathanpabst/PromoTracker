@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Panel } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import './BookSpark.css';
@@ -17,6 +17,7 @@ class BookSpark extends Component {
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.onSort = this.onSort.bind(this);
     }
 
     componentDidMount() {
@@ -38,7 +39,14 @@ class BookSpark extends Component {
         this.setState({ isModalOpen: false });
     }
 
+    onSort(event, sortKey) {
+        const promos = this.state.promos;
+        promos.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+        this.setState({ promos });
+    }
+
     render() {
+        //const sortedPromos = this.state.promos; 
         const { promos } = this.state;
 
         const promoComponents = promos.map((promo) => (
@@ -65,10 +73,10 @@ class BookSpark extends Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <Table striped bordered hover size="lg">
+                            <Table striped bordered hover responsive={true}>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th onClick={e => this.onSort(e, 'name')}>Name</th>
                                         <th>Expiration</th>
                                         <th>Details</th>                                       
                                     </tr>
