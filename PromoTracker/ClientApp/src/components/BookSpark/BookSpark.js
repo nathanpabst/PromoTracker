@@ -1,10 +1,13 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
-import { Table, Button, Panel } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
+import FontAwesome from 'react-fontawesome';
+
 
 import './BookSpark.css';
+
 
 class BookSpark extends Component {
     constructor(props) {
@@ -17,7 +20,8 @@ class BookSpark extends Component {
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.onSort = this.onSort.bind(this);
+        //this.onSort = this.onSort.bind(this);
+
     }
 
     componentDidMount() {
@@ -39,10 +43,19 @@ class BookSpark extends Component {
         this.setState({ isModalOpen: false });
     }
 
-    onSort(event, sortKey) {
+    //onSort(event, sortKey) {
+    //    const promos = this.state.promos;
+    //    promos.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+    //    this.setState({ promos });
+    //}
+
+    sortBy(key) {
         const promos = this.state.promos;
-        promos.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
-        this.setState({ promos });
+        console.log(key);
+        this.setState({
+            promos: promos.sort((a, b) => a[key] < b[key])
+
+        })
     }
 
     render() {
@@ -76,7 +89,15 @@ class BookSpark extends Component {
                             <Table striped bordered hover responsive={true}>
                                 <thead>
                                     <tr>
-                                        <th onClick={e => this.onSort(e, 'name')}>Name</th>
+                                        <th>
+                                            Name
+                                            
+                                            <FontAwesome
+                                                className="fas fa-sort sortIcon"
+                                                name="sort"
+                                            />
+
+                                            </th>                                     
                                         <th>Expiration</th>
                                         <th>Details</th>                                       
                                     </tr>
