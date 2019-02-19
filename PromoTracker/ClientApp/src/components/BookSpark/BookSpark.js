@@ -1,10 +1,10 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
-import PromoTable from './../Tables/PromoTable';
+//import PromoTable from './../Tables/PromoTable';
 import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
-//import FontAwesome from 'react-fontawesome';
+import FontAwesome from 'react-fontawesome';
 
 
 import './BookSpark.css';
@@ -17,7 +17,11 @@ class BookSpark extends Component {
         this.state = {
             promos: [],
             isModalOpen: false,
-            singlePromo: {}
+            singlePromo: {},
+            sortedPromos: [],
+            direction: {
+                name: 'asc'
+            }
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -45,32 +49,42 @@ class BookSpark extends Component {
 
     sortBy(key) {
         console.log(key);
-        const { promos } = this.state;
+        //const { promos } = this.state;
         this.setState({
-            promos: promos.sort((a, b) => a[key] < b[key])
+            sortedPromos: this.state.promos.sort((a, b) => (
+                this.state.direction[key] === 'asc'
+                    ? a[key] - b[key]
+                    : b[key] - a[key]
+            )),
+            direction: {
+                [key]: this.state.direction[key] === 'asc'
+                    ? 'desc'
+                    : 'asc'
+            }
 
         });
     }
 
     render() {
-        //const { promos } = this.state;
+        const { promos } = this.state;
 
-        //const promoComponents = promos.map((promo) => (
-        //    <tr key={promo.id}>
-        //        <td>{promo.name}</td>
-        //        <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
-        //        <td>
-        //            <Button
-        //                bsStyle="primary"
-        //                size="sm"
-        //                value={promo.id}
-        //                onClick={() => this.openModal(promo)}
-        //            >
-        //             View
-        //            </Button>
-        //        </td>
-        //    </tr>
-        //));
+        
+        const promoComponents = promos.map((promo) => (
+            <tr key={promo.id}>
+                <td>{promo.name}</td>
+                <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
+                <td>
+                    <Button
+                        bsStyle="primary"
+                        size="sm"
+                        value={promo.id}
+                        onClick={() => this.openModal(promo)}
+                    >
+                     View
+                    </Button>
+                </td>
+            </tr>
+        ));
 
         return (
             <div className="spark" >
@@ -79,12 +93,26 @@ class BookSpark extends Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <PromoTable
-                                data={this.state.promos}
-                                sortBy={this.sortBy}
-                            />
-                               
-                                
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th> Name
+                                            <span onClick={() => this.sortBy('name')}>
+                                                <FontAwesome
+                                                    className="fas fa-sort sortIcon"
+                                                    name="sort"
+
+                                                />
+                                            </span>
+                                        </th>
+                                        <th>Expiration</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {promoComponents}
+                                </tbody>
+                            </Table>                                                            
                         </div>
                     </div>
                 </div>
