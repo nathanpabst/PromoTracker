@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
-//import PromoTable from './../Tables/PromoTable';
 import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 import FontAwesome from 'react-fontawesome';
@@ -47,8 +46,14 @@ class BookSpark extends Component {
         this.setState({ isModalOpen: false });
     }
 
+    //sortAscending = () => {
+    //    const { promos } = this.state;
+    //    promos.sort((a, b) => a - b);
+    //    this.setState({ promos });
+    //}
+
     sortBy(key) {
-        console.log(key);
+        console.log(typeof key);
         //const { promos } = this.state;
         this.setState({
             sortedPromos: this.state.promos.sort((a, b) => (
@@ -61,15 +66,13 @@ class BookSpark extends Component {
                     ? 'desc'
                     : 'asc'
             }
-
         });
     }
 
     render() {
         const { promos } = this.state;
-
-        
-        const promoComponents = promos.map((promo) => (
+       
+        const promoComponents = promos.map((promo) => (               
             <tr key={promo.id}>
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
