@@ -1,4 +1,6 @@
 ﻿import React, { Component } from 'react';
+import FontAwesome from 'react-fontawesome';
+
 
 import './Search.css';
 
@@ -15,14 +17,15 @@ class Search extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="input-group searchBar">
+            <div className="row header-row">
+                <div className="filter-container searchBar col-sm-3">
                     <input
-                        type="text" className="form-control"
-                        placeholder="Search for an existing promotion"
+                        type="text" 
+                        className="form-control searchIcon"
+                        placeholder="Filter"
                         ref={input => this.search = input}
                         onChange={this.handleInputChange}
-                    />
+                    />                       
                 </div>
             </div>
             );

@@ -1,4 +1,10 @@
 ﻿.searchBar {
     padding: 15px;
-    width: 70%;
+}
+
+.searchIcon {
+    float: right;
+    font-family: FontAwesome;
+    line-height: 1;
+    position: relative;
 }
