@@ -27,6 +27,7 @@ class BookSpark extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.sortBy = this.sortBy.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
     }
 
     componentDidMount() {
@@ -48,12 +49,6 @@ class BookSpark extends Component {
         this.setState({ isModalOpen: false });
     }
 
-    //sortAscending = () => {
-    //    const { promos } = this.state;
-    //    promos.sort((a, b) => a - b);
-    //    this.setState({ promos });
-    //}
-
     sortBy(key) {
         console.log(typeof key);
         //const { promos } = this.state;
@@ -71,16 +66,22 @@ class BookSpark extends Component {
         });
     }
 
-    updateSearchInput = (searchTerm) => {
+    searchHandler = (searchTerm) => {
         this.setState({
             searchTerm
         });
     }
 
+    findMatches(input) {
+        return function (x) {
+            return x.name.toLowerCase().includes(input.toLowerCase()) || !input;
+        };
+    }
+
     render() {
         const { promos } = this.state;
        
-        const promoComponents = promos.map((promo) => (               
+        const promoComponents = promos.filter( this.findMatches(this.state.searchTerm)).map((promo) => (               
             <tr key={promo.id}>
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
@@ -103,7 +104,7 @@ class BookSpark extends Component {
                 <div className="promotions">
 
                     <Search
-                        onSearch={this.updateSearchInput}
+                        onSearch={this.searchHandler}
                         searchTerm={this.state.searchTerm}
                     />
 
