@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
+import Search from './../Search/Search';
 import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 import FontAwesome from 'react-fontawesome';
@@ -16,6 +17,7 @@ class BookSpark extends Component {
         this.state = {
             promos: [],
             isModalOpen: false,
+            searchTerm: '',
             singlePromo: {},
             sortedPromos: [],
             direction: {
@@ -69,6 +71,12 @@ class BookSpark extends Component {
         });
     }
 
+    updateSearchInput = (searchTerm) => {
+        this.setState({
+            searchTerm
+        });
+    }
+
     render() {
         const { promos } = this.state;
        
@@ -93,6 +101,12 @@ class BookSpark extends Component {
             <div className="spark" >
                
                 <div className="promotions">
+
+                    <Search
+                        onSearch={this.updateSearchInput}
+                        searchTerm={this.state.searchTerm}
+                    />
+
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
