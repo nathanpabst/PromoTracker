@@ -5,7 +5,11 @@ import Admin from './components/Admin/Admin';
 import BookSpark from './components/BookSpark/BookSpark';
 import SparkReporting from './components/Reporting/SparkReporting';
 import Search from './components/Search/Search';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+library.add(faHome);
 
 
 class App extends Component {

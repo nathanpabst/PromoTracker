@@ -3,8 +3,11 @@ import PromoRequests from './../Requests/PromoRequests';
 import PromoViewModal from './../Modals/PromoViewModal';
 import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
+import FontAwesome from 'react-fontawesome';
+
 
 import './BookSpark.css';
+
 
 class BookSpark extends Component {
     constructor(props) {
@@ -13,10 +16,15 @@ class BookSpark extends Component {
         this.state = {
             promos: [],
             isModalOpen: false,
-            singlePromo: {}
+            singlePromo: {},
+            sortedPromos: [],
+            direction: {
+                name: 'asc'
+            }
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.sortBy = this.sortBy.bind(this);
     }
 
     componentDidMount() {
@@ -38,10 +46,33 @@ class BookSpark extends Component {
         this.setState({ isModalOpen: false });
     }
 
+    //sortAscending = () => {
+    //    const { promos } = this.state;
+    //    promos.sort((a, b) => a - b);
+    //    this.setState({ promos });
+    //}
+
+    sortBy(key) {
+        console.log(typeof key);
+        //const { promos } = this.state;
+        this.setState({
+            sortedPromos: this.state.promos.sort((a, b) => (
+                this.state.direction[key] === 'asc'
+                    ? a[key] - b[key]
+                    : b[key] - a[key]
+            )),
+            direction: {
+                [key]: this.state.direction[key] === 'asc'
+                    ? 'desc'
+                    : 'asc'
+            }
+        });
+    }
+
     render() {
         const { promos } = this.state;
-
-        const promoComponents = promos.map((promo) => (
+       
+        const promoComponents = promos.map((promo) => (               
             <tr key={promo.id}>
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
@@ -65,18 +96,26 @@ class BookSpark extends Component {
                     <div className="panel panel-primary">
                         <div className="panel-heading">Active Promotions</div>
                         <div className="panel-body">
-                            <Table striped bordered hover size="lg">
+                            <Table striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th> Name
+                                            <span onClick={() => this.sortBy('name')}>
+                                                <FontAwesome
+                                                    className="fas fa-sort sortIcon"
+                                                    name="sort"
+
+                                                />
+                                            </span>
+                                        </th>
                                         <th>Expiration</th>
-                                        <th>Details</th>                                       
+                                        <th>Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {promoComponents}
                                 </tbody>
-                            </Table>
+                            </Table>                                                            
                         </div>
                     </div>
                 </div>
