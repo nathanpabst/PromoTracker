@@ -24,7 +24,7 @@ class Admin extends React.Component {
         this.closeEditModal = this.closeEditModal.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.searchHandler = this.searchHandler.bind(this);
-        
+
         this.state = {
             promos: [],
             addPromo: {
@@ -36,10 +36,10 @@ class Admin extends React.Component {
                 restrictions: ""
             },
             updatePromo: {
-                
+
             },
             isAddModalOpen: false,
-            isEditModalOpen: false, 
+            isEditModalOpen: false,
             searchTerm: ''
         };
     }
@@ -83,7 +83,7 @@ class Admin extends React.Component {
         PromoRequests
             .newPromo(promo)
             .then(() => {
-                alert("Updated!");               
+                alert("Updated!");
                 this.setState({
                     addPromo: {
                         name: "",
@@ -107,7 +107,7 @@ class Admin extends React.Component {
         PromoRequests
             .updatePromo(id, promo)
             .then(() => {
-                alert("Updated!");               
+                alert("Updated!");
                 this.closeEditModal();
                 this.getPromos();
             })
@@ -165,7 +165,7 @@ class Admin extends React.Component {
                 hide={this.closeEditModal}
                 save={this.handleUpdate}
                 promo={this.state.updatePromo}
-            />);
+             />);
 
         return (
             <div>
@@ -181,7 +181,6 @@ class Admin extends React.Component {
                     <Button variant="success" size="lg" onClick={this.openAddModal}>Add Promotion</Button>
                 </div>
 
-
                 <AddModal
                     show={this.state.isAddModalOpen}
                     hide={this.closeAddModal}
@@ -189,35 +188,29 @@ class Admin extends React.Component {
                     promo={this.state.addPromo}
                 />
 
-
-
                 {editModal}
 
-                <div className="promotions">
-                    <div className="panel panel-primary">
-                        <div className="panel-heading">Active Promotions</div>
-                        <div className="panel-body">
-                            <Table striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Start Date</th>
-                                        <th>Expiration Date</th>
-                                        <th>Description</th>
-                                        <th>Category</th>
-                                        <th>Restrictions</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {promoComponents}
-                                </tbody>
-                            </Table>
-                        </div>
-                    </div>
+                <div className="admin-table">
+                    <Table striped bordered hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>Expiration Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Restrictions</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {promoComponents}
+                        </tbody>
+                    </Table>
                 </div>
             </div>
+
         );
     }
 }
