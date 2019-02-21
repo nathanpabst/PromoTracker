@@ -6,7 +6,6 @@ import { Table, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 import FontAwesome from 'react-fontawesome';
 
-
 import './BookSpark.css';
 
 
@@ -50,7 +49,7 @@ class BookSpark extends Component {
     }
 
     sortBy(key) {
-        console.log(typeof key);
+        //console.log(typeof key);
         //const { promos } = this.state;
         this.setState({
             sortedPromos: this.state.promos.sort((a, b) => (
@@ -80,8 +79,8 @@ class BookSpark extends Component {
 
     render() {
         const { promos } = this.state;
-       
-        const promoComponents = promos.filter( this.findMatches(this.state.searchTerm)).map((promo) => (               
+
+        const promoComponents = promos.filter(this.findMatches(this.state.searchTerm)).map((promo) => (
             <tr key={promo.id}>
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
@@ -92,7 +91,7 @@ class BookSpark extends Component {
                         value={promo.id}
                         onClick={() => this.openModal(promo)}
                     >
-                     View
+                        View
                     </Button>
                 </td>
             </tr>
@@ -100,8 +99,9 @@ class BookSpark extends Component {
 
         return (
             <div className="spark" >
-               
+
                 <div className="promotions">
+
                     <h1 className="text-center">Available Promotions</h1>
 
                     <Search
@@ -109,30 +109,27 @@ class BookSpark extends Component {
                         searchTerm={this.state.searchTerm}
                     />
 
-                    <div className="panel panel-primary">
-                        <div className="panel-heading">Active Promotions</div>
-                        <div className="panel-body">
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th> Name
+                    <div className="promo-table">
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th> Name
                                             <span onClick={() => this.sortBy('name')}>
-                                                <FontAwesome
-                                                    className="fas fa-sort sortIcon"
-                                                    name="sort"
+                                            <FontAwesome
+                                                className="fas fa-sort sortIcon"
+                                                name="sort"
 
-                                                />
-                                            </span>
-                                        </th>
-                                        <th>Expiration</th>
-                                        <th>Details</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {promoComponents}
-                                </tbody>
-                            </Table>                                                            
-                        </div>
+                                            />
+                                        </span>
+                                    </th>
+                                    <th>Expiration</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {promoComponents}
+                            </tbody>
+                        </Table>
                     </div>
                 </div>
 
