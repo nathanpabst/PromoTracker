@@ -1,26 +1,26 @@
-﻿//import React, { Component } from 'react';
-//import { Alert } from 'react-bootstrap';
+﻿import React, { Component } from 'react';
+import { Alert } from 'react-bootstrap';
 
-//import './Alert.css';
+import './Alert.css';
 
-//class SuccessAlert extends Component {
-//    state = {
-//        show: true
-//    };
+class SuccessAlert extends Component {
+    state = {
+        show: true
+    };
 
-//    handleDismiss = () => {
-//        this.setState({ show: false });
-//    }
+    handleDismiss = () => {
+        this.setState({ show: false });
+    }
 
-//    render() {
+    render() {
         
-//        return (
-//            <Alert variant="success">
-//                <Alert.Heading>Hey, nice to see you</Alert.Heading>
-//            </Alert>
+        return (
+            <Alert variant="success">
+                <Alert.Heading>Hey, nice to see you</Alert.Heading>
+            </Alert>
 
-//        );
-//    }
-//}
+        );
+    }
+}
 
-//export default SuccessAlert;
+export default SuccessAlert;
