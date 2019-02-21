@@ -3,9 +3,11 @@ import { Button, Table } from 'react-bootstrap';
 import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 import Moment from 'react-moment';
+import EditModal from '../Modals/EditModal';
+import Search from './../Search/Search';
+//import FontAwesome from 'react-fontawesome';
 
 import './Admin.css';
-import EditModal from '../Modals/EditModal';
 
 class Admin extends React.Component {
     constructor(props, context) {
@@ -21,6 +23,7 @@ class Admin extends React.Component {
         this.openEditModal = this.openEditModal.bind(this);
         this.closeEditModal = this.closeEditModal.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
         
         this.state = {
             promos: [],
@@ -36,7 +39,8 @@ class Admin extends React.Component {
                 
             },
             isAddModalOpen: false,
-            isEditModalOpen: false
+            isEditModalOpen: false, 
+            searchTerm: ''
         };
     }
 
@@ -124,11 +128,21 @@ class Admin extends React.Component {
         });
     }
 
+    searchHandler = (searchTerm) => {
+        this.setState({ searchTerm });
+    }
+
+    findMatches(input) {
+        return function (x) {
+            return x.name.toLowerCase().includes(input.toLowerCase()) || !input;
+        };
+    }
+
     render() {
 
         const { promos } = this.state;
 
-        const promoComponents = promos.map((promo) => (
+        const promoComponents = promos.filter(this.findMatches(this.state.searchTerm)).map((promo) => (
             <tr key={promo.id}>
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.start}</Moment></td>
@@ -155,6 +169,14 @@ class Admin extends React.Component {
 
         return (
             <div>
+
+                <h1 className="text-center">Promotion Management Portal</h1>
+
+                <Search
+                    onSearch={this.searchHandler}
+                    searchTerm={this.searchTerm}
+                />
+
                 <div className="addPromotion">
                     <Button variant="success" size="lg" onClick={this.openAddModal}>Add Promotion</Button>
                 </div>
