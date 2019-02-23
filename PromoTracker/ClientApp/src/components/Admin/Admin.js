@@ -1,10 +1,12 @@
 ﻿import React from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Alert } from 'react-bootstrap';
 import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 import Moment from 'react-moment';
 import EditModal from '../Modals/EditModal';
 import Search from './../Search/Search';
+import swal from 'sweetalert';
+//import SuccessAlert from './../Alerts/Alert';
 //import FontAwesome from 'react-fontawesome';
 
 import './Admin.css';
@@ -83,7 +85,11 @@ class Admin extends React.Component {
         PromoRequests
             .newPromo(promo)
             .then(() => {
-                alert("Updated!");
+                swal({
+                    title: "Another promotion! Yesssss!",
+                    text: "You successfully added a promotion.",
+                    icon: "success"
+                });
                 this.setState({
                     addPromo: {
                         name: "",
@@ -107,7 +113,12 @@ class Admin extends React.Component {
         PromoRequests
             .updatePromo(id, promo)
             .then(() => {
-                alert("Updated!");
+                swal({
+                    title: "Got it!",
+                    text: "You successfully updated this promotion.",
+                    icon: "success",
+                    button: "close"
+                });
                 this.closeEditModal();
                 this.getPromos();
             })
@@ -120,7 +131,9 @@ class Admin extends React.Component {
         return new Promise((resolve, reject) => {
             PromoRequests.deletePromo(promo.id)
                 .then(response => {
-                    alert('this code is no mas.');
+                    swal("Poof! This code is no mas.", {
+                        icon: "success",
+                    });
                     resolve(response);
                     this.getPromos();
                 })
@@ -165,7 +178,7 @@ class Admin extends React.Component {
                 hide={this.closeEditModal}
                 save={this.handleUpdate}
                 promo={this.state.updatePromo}
-             />);
+            />);
 
         return (
             <div>
