@@ -1,12 +1,11 @@
 ﻿import React from 'react';
-import { Button, Table, Alert } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import AddModal from './../Modals/AddModal';
 import PromoRequests from './../Requests/PromoRequests';
 import Moment from 'react-moment';
 import EditModal from '../Modals/EditModal';
 import Search from './../Search/Search';
 import swal from 'sweetalert';
-//import SuccessAlert from './../Alerts/Alert';
 //import FontAwesome from 'react-fontawesome';
 
 import './Admin.css';

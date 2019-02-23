@@ -12,7 +12,7 @@ class Reporting extends Component {
         this.state = {
             barData: [],
             groupedBarData: []
-            
+
         };
     }
 
@@ -25,7 +25,7 @@ class Reporting extends Component {
         OrderRequests
             .GetAggregatedOrderData()
             .then(groupedBarData => {
-                
+
                 this.setState({
                     groupedBarData: groupedBarData.data
                 });
@@ -64,25 +64,31 @@ class Reporting extends Component {
 
         return (
             <div>
-                <h2> Title Additions</h2>,
+                <div className="titleAdditionsContainer">
+                    <h2 className="text-center"> Title Additions</h2>
 
-                <Bar
-                    data={barData}
-                    width={1000}
-                    isHorizontal={false}
-                    margin={marginObject}
-                 />,
+                    <Bar
+                        data={barData}
+                        width={1000}                       
+                        isAnimated={true}                     
+                        isHorizontal={false}
+                        margin={marginObject}
+                    />
+                </div>
 
-            <h2> Units Shipped & Print Fees</h2>,
-            <GroupedBar
-                data={groupedBarData}
-                isHorizontal={true}
-                width={500}
-                height={500}
-            />
-    
+                <div className="unitsShippedContainer">
+                    <h2 className="text-center"> Units Shipped & Print Fees</h2>
+                    <GroupedBar
+                        data={groupedBarData}
+                        isHorizontal={true}
+                        width={1000}
+                        height={750}
+                    />
+                </div>
+
+
             </div>
-        );       
+        );
     }
 }
 
