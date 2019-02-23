@@ -118,8 +118,8 @@ class Admin extends React.Component {
                     text: "You successfully updated this promotion.",
                     icon: "success",
                     button: "close"
-                });                
-                 this.closeEditModal();
+                });
+                this.closeEditModal();
                 this.getPromos();
             })
             .catch((error) => {
@@ -131,7 +131,9 @@ class Admin extends React.Component {
         return new Promise((resolve, reject) => {
             PromoRequests.deletePromo(promo.id)
                 .then(response => {
-                    alert('this code is no mas.');
+                    swal("Poof! This code is no mas.", {
+                        icon: "success",
+                    });
                     resolve(response);
                     this.getPromos();
                 })
@@ -176,7 +178,7 @@ class Admin extends React.Component {
                 hide={this.closeEditModal}
                 save={this.handleUpdate}
                 promo={this.state.updatePromo}
-             />);
+            />);
 
         return (
             <div>
