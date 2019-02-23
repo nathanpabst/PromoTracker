@@ -85,7 +85,11 @@ class Admin extends React.Component {
         PromoRequests
             .newPromo(promo)
             .then(() => {
-                alert("Updated!");
+                swal({
+                    title: "Another promotion! Yesssss!",
+                    text: "You successfully added a promotion.",
+                    icon: "success"
+                });
                 this.setState({
                     addPromo: {
                         name: "",
