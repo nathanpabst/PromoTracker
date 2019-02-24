@@ -20,4 +20,14 @@ const GetOrderTypeRatio = () => {
     });
 };
 
-export default { GetAggregatedOrderData, GetOrderTypeRatio };
+const GetUnitsShipped = () => {
+    const apiPath = `api/order/byUnits`;
+    return new Promise((resolve, reject) => {
+        axios
+            .get(apiPath)
+            .then(unitsShipped => resolve(unitsShipped))
+            .catch(error => reject(error));
+    });
+};
+
+export default { GetAggregatedOrderData, GetOrderTypeRatio, GetUnitsShipped };

@@ -34,6 +34,13 @@ namespace PromoTracker.Controllers
             var orderTypeSummary = _orders.GetOrderTypeRatio();
             return Ok(orderTypeSummary);
         }
+
+        [HttpGet("byUnits")]
+        public IActionResult GetUnitsShipped()
+        {
+            var unitsSummary = _orders.GetUnitsShipped();
+            return Ok(unitsSummary);
+        }
         
     }
 }
