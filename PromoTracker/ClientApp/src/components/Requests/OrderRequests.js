@@ -30,4 +30,14 @@ const GetUnitsShipped = () => {
     });
 };
 
-export default { GetAggregatedOrderData, GetOrderTypeRatio, GetUnitsShipped };
+const GetPrintFees = () => {
+    const apiPath = `api/order/byFees`;
+    return new Promise((resolve, reject) => {
+        axios
+            .get(apiPath)
+            .then(feesCollected => resolve(feesCollected))
+            .catch(error => reject(error));
+    });
+};
+
+export default { GetAggregatedOrderData, GetOrderTypeRatio, GetUnitsShipped, GetPrintFees };

@@ -14,8 +14,9 @@ class Reporting extends Component {
         this.state = {
             barData: [],
             groupedBarData: [],
-            orderRatioData: []
-
+            orderRatioData: [],
+            unitsData: [],
+            feeData: []
         };
     }
 
@@ -23,6 +24,8 @@ class Reporting extends Component {
         this.getBarData();
         this.getGroupedBarData();
         this.getOrderRatioData();
+        this.getUnitsShippedData();
+        this.getFeeData();
     }
 
     getOrderRatioData() {
@@ -31,6 +34,28 @@ class Reporting extends Component {
             .then(orderRatioData => {
                 this.setState({
                     orderRatioData: orderRatioData.data
+                });
+            })
+            .catch(error => console.log(error));
+    }
+
+    getUnitsShippedData() {
+        OrderRequests
+            .GetUnitsShipped()
+            .then(unitsData => {
+                this.setState({
+                    unitsData: unitsData.data
+                });
+            })
+            .catch(error => console.log(error));
+    }
+
+    getFeeData() {
+        OrderRequests
+            .GetPrintFees()
+            .then(feeData => {
+                this.setState({
+                    feeData: feeData.data
                 });
             })
             .catch(error => console.log(error));
@@ -70,6 +95,8 @@ class Reporting extends Component {
         const { barData } = this.state;
         const { groupedBarData } = this.state;
         const { orderRatioData } = this.state;
+        const { unitsData } = this.state;
+        const { feeData } = this.state;
 
         const marginObject = {
             left: 40,
@@ -78,6 +105,13 @@ class Reporting extends Component {
             bottom: 40
         };
 
+        const UnitsMarginObject = {
+            left: 120,
+            right: 20,
+            top: 20,
+            bottom: 15
+        }
+
         const orderTypeComponents = orderRatioData.map((type, i) => (
             <tr key={i}>
                 <td>{type.name}</td>
@@ -85,11 +119,11 @@ class Reporting extends Component {
             </tr>
         ));
 
+
         return (
-            <div>
+            <div className="reportingContainer">
                 <div className="titleAdditionsContainer">
                     <h2 className="text-center"> Title Additions</h2>
-
                     <Bar
                         data={barData}
                         width={1000}
@@ -98,6 +132,33 @@ class Reporting extends Component {
                         margin={marginObject}
                     />
                 </div>
+
+                <div className="unitsAndFeesContainer">
+                    <section>
+                        <div className="unitsItem col-sm-6">
+                            <h3 className="unitsShippedHeader">Units Shipped by Promotion</h3>
+                                <Bar
+                                    data={unitsData}
+                                    width={600}
+                                    height={300}
+                                    isHorizontal={true}
+                                    isAnimated={true}
+                                    margin={UnitsMarginObject}
+                                />
+                        </div>
+
+                        <div className="feeItem col-sm-6">
+                            <h3 className="printFeesHeader">Print Fees by Promotion</h3>
+
+                        </div>
+
+
+                    </section>
+                </div>
+
+
+
+
 
                 <div className="unitsShippedContainer">
                     <h2 className="text-center"> Units Shipped & Print Fees</h2>

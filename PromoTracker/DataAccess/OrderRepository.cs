@@ -48,6 +48,21 @@ namespace PromoTracker.DataAccess
             }
         }
 
+        public IEnumerable<PrintFees> GetPrintFees()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<PrintFees>(@"SELECT SUM(printFee) AS [value],
+                                                            p.name AS [NAME]
+                                                        FROM [dbo].[order] AS o
+                                                        LEFT JOIN book AS b ON o.id = b.id
+                                                        LEFT JOIN promotion AS p ON b.promoId = p.id
+                                                        GROUP BY p.name");
+
+                return result.ToList();
+            }
+        }
+
         public IEnumerable<OrdersWithPromo> GetAggregatedOrderData()
         {
             using (var connection = new SqlConnection(ConnectionString))

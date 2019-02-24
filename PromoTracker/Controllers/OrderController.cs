@@ -41,6 +41,13 @@ namespace PromoTracker.Controllers
             var unitsSummary = _orders.GetUnitsShipped();
             return Ok(unitsSummary);
         }
+
+        [HttpGet("byFees")]
+        public IActionResult GetPrintFees()
+        {
+            var feesSummary = _orders.GetPrintFees();
+            return Ok(feesSummary);
+        }
         
     }
 }
