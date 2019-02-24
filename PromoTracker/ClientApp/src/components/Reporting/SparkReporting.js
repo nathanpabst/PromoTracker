@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from '../Requests/PromoRequests';
 import OrderRequests from '../Requests/OrderRequests';
-import { Bar, GroupedBar } from 'britecharts-react';
+import { Bar, GroupedBar, Donut } from 'britecharts-react';
 
 import './SparkReporting.css';
 
@@ -11,7 +11,8 @@ class Reporting extends Component {
 
         this.state = {
             barData: [],
-            groupedBarData: []
+            groupedBarData: [],
+            orderRatioData: []
 
         };
     }
@@ -19,6 +20,18 @@ class Reporting extends Component {
     componentDidMount() {
         this.getBarData();
         this.getGroupedBarData();
+        this.getOrderRatioData();
+    }
+
+    getOrderRatioData() {
+        OrderRequests
+            .GetOrderTypeRatio()
+            .then(orderRatioData => {
+                this.setState({
+                    orderRatioData: orderRatioData.data
+                });
+            })
+            .catch(error => console.log(error));
     }
 
     getGroupedBarData() {
@@ -54,6 +67,7 @@ class Reporting extends Component {
     render() {
         const { barData } = this.state;
         const { groupedBarData } = this.state;
+        const { orderRatioData } = this.state;
 
         const marginObject = {
             left: 40,
@@ -69,8 +83,8 @@ class Reporting extends Component {
 
                     <Bar
                         data={barData}
-                        width={1000}                       
-                        isAnimated={true}                     
+                        width={1000}
+                        isAnimated={true}
                         isHorizontal={false}
                         margin={marginObject}
                     />
@@ -85,6 +99,17 @@ class Reporting extends Component {
                         height={750}
                     />
                 </div>
+
+                <div className="orderRatioContainer">
+                    <h2 className="text-center"> Order Type Ratio</h2>
+                    <Donut
+                        data={orderRatioData}
+                        isAnimated={true}
+                        width={500}
+                        height={500}
+                    />
+                </div>
+
 
 
             </div>
