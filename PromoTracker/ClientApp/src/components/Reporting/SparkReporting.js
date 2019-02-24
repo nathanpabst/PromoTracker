@@ -1,6 +1,8 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from '../Requests/PromoRequests';
 import OrderRequests from '../Requests/OrderRequests';
+import { Table } from 'react-bootstrap';
+
 import { Bar, GroupedBar, Donut } from 'britecharts-react';
 
 import './SparkReporting.css';
@@ -76,6 +78,13 @@ class Reporting extends Component {
             bottom: 40
         };
 
+        const orderTypeComponents = orderRatioData.map((type, i) => (
+            <tr key={i}>
+                <td>{type.name}</td>
+                <td>{type.quantity.toLocaleString()}</td>
+            </tr>
+        ));
+
         return (
             <div>
                 <div className="titleAdditionsContainer">
@@ -100,19 +109,43 @@ class Reporting extends Component {
                     />
                 </div>
 
-                <div className="orderRatioContainer">
-                    <h2 className="text-center"> Order Type Ratio</h2>
-                    <Donut
-                        data={orderRatioData}
-                        isAnimated={true}
-                        width={500}
-                        height={500}
-                    />
+                <div className="orderType">
+                    <section>
+
+                        <div className="orderTypeItem col-sm-6">
+                            <h3 className="donutHeader"> Order Type Ratio </h3>
+                            <Donut
+                                data={orderRatioData}
+                                isAnimated={true}
+                                width={300}
+                                height={300}
+                            />
+                        </div>
+
+                        <div className="orderTypeContainer">
+                            <div className="orderTypeItem col-sm-6">
+                                <h3 className="text-center">Aggregated Orders by Type</h3>
+                                    <div className="orderMethodTable">
+                                        <Table striped bordered hover variant="dark">
+                                            <thead>
+                                                <tr>
+                                                    <th>Order Method</th>
+                                                    <th>Units Shipped</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {orderTypeComponents}
+                                            </tbody>
+                                        </Table>
+                                    </div>
+                            </div>
+                           
+                        </div>
+                    </section>
                 </div>
 
 
-
-            </div>
+            </div >
         );
     }
 }
