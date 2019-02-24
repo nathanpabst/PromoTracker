@@ -18,6 +18,21 @@ namespace PromoTracker.DataAccess
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
+        public IEnumerable<SumByOrderType> GetOrderTypeRatio()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<SumByOrderType>(@"SELECT SUM(quantity) AS [quantity],
+                                                                    x.type AS [name]
+                                                                FROM [dbo].[order] AS o
+                                                                JOIN orderType AS x ON o.orderTypeId = x.id
+                                                                GROUP BY x.type"
+                                                                );
+                return result.ToList();
+            }
+        }
+
         public IEnumerable<OrdersWithPromo> GetAggregatedOrderData()
         {
             using (var connection = new SqlConnection(ConnectionString))

@@ -27,6 +27,13 @@ namespace PromoTracker.Controllers
             var orderDataList = _orders.GetAggregatedOrderData();
             return Ok(orderDataList);
         }
+
+        [HttpGet("byType")]
+        public IActionResult GetOrderTypeRatio()
+        {
+            var orderTypeSummary = _orders.GetOrderTypeRatio();
+            return Ok(orderTypeSummary);
+        }
         
     }
 }
