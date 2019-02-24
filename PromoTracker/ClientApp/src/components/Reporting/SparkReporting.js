@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import PromoRequests from '../Requests/PromoRequests';
 import OrderRequests from '../Requests/OrderRequests';
+import { Table } from 'react-bootstrap';
 import { Bar, GroupedBar, Donut } from 'britecharts-react';
 
 import './SparkReporting.css';
@@ -76,6 +77,13 @@ class Reporting extends Component {
             bottom: 40
         };
 
+        const orderTypeComponents = orderRatioData.map((type, i) => (
+            <tr key={i}>
+                <td>{type.name}</td>
+                <td>{type.quantity.toLocaleString()}</td>
+            </tr>
+        ));
+
         return (
             <div>
                 <div className="titleAdditionsContainer">
@@ -102,6 +110,19 @@ class Reporting extends Component {
 
                 <div className="orderRatioContainer">
                     <h2 className="text-center"> Order Type Ratio</h2>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th> Order Type </th>
+                                <th> Order Quantity </th>
+                            </tr>
+                        </thead>
+
+                            <tbody>
+                                {orderTypeComponents}
+                            </tbody>
+                    </Table>
+
                     <Donut
                         data={orderRatioData}
                         isAnimated={true}
