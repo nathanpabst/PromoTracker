@@ -2,6 +2,10 @@
     padding-left: 55px;
 }
 
+h3 {
+    font-family: serif;
+}
+
 .y-axis-label {
 font-size: 15px;
 padding: 10px;

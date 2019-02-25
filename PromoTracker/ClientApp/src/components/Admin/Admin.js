@@ -182,7 +182,7 @@ class Admin extends React.Component {
         return (
             <div>
 
-                <h1 className="text-center">Promotion Management Portal</h1>
+                <h3 className="text-center">Promotion Management Portal</h3>
 
                 <Search
                     onSearch={this.searchHandler}

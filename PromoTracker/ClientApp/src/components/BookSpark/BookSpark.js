@@ -102,7 +102,7 @@ class BookSpark extends Component {
 
                 <div className="promotions">
 
-                    <h1 className="text-center">Available Promotions</h1>
+                    <h3 className="text-center">Available Promotions</h3>
 
                     <Search
                         onSearch={this.searchHandler}
