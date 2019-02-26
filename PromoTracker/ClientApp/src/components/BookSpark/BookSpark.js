@@ -85,8 +85,7 @@ class BookSpark extends Component {
                 <td>{promo.name}</td>
                 <td><Moment format="MM/DD/YYYY">{promo.end}</Moment></td>
                 <td>
-                    <Button
-                        bsStyle="primary"
+                    <Button className="blue-btn"                       
                         size="sm"
                         value={promo.id}
                         onClick={() => this.openModal(promo)}

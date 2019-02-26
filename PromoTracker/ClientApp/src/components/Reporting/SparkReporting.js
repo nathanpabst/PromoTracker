@@ -112,6 +112,8 @@ class Reporting extends Component {
             bottom: 40
         };
 
+        
+
         const orderTypeComponents = orderRatioData.map((type, i) => (
             <tr key={i}>
                 <td>{type.name}</td>
@@ -123,7 +125,7 @@ class Reporting extends Component {
         return (
             <div className="reportingContainer">
                 <div className="titleAdditionsContainer">
-                    <h3 className="text-center"> Title Additions</h3>
+                    <h2 className="text-center"> Title Additions</h2>
                     <Bar
                         data={barData}
                         width={1000}
@@ -134,7 +136,7 @@ class Reporting extends Component {
                 </div>
 
                 <div className="unitsContainer col-sm-12">
-                    <h3 className="unitsShippedHeader text-center">Units Shipped by Promotion</h3>
+                    <h2 className="unitsShippedHeader text-center">Units Shipped by Promotion</h2>
                     <Bar
                         data={unitsData}
                         width={1000}
@@ -144,7 +146,7 @@ class Reporting extends Component {
                     />
                 </div>
                 <div className="feesContainer col-sm-12">
-                    <h3 className="printFeesHeader text-center">Fees Collected by Promotion</h3>
+                    <h2 className="printFeesHeader text-center">Fees Collected by Promotion</h2>
                     <Bar
                         data={feeData}
                         isAnimated={true}
@@ -154,7 +156,7 @@ class Reporting extends Component {
                 </div>
 
                 <div className="unitsShippedContainer">
-                    <h3 className="text-center"> Units Shipped & Print Fees</h3>
+                    <h2 className="text-center"> Units Shipped & Print Fees</h2>
                     <GroupedBar
                         data={groupedBarData}
                         isHorizontal={true}
@@ -167,7 +169,7 @@ class Reporting extends Component {
                     <section>
 
                         <div className="orderTypeItem col-sm-6">
-                            <h3 className="donutHeader"> Order Type Summary </h3>
+                            <h2 className="donutHeader"> Order Type Summary </h2>
                             <Donut
                                 data={orderRatioData}
                                 isAnimated={true}
@@ -178,7 +180,7 @@ class Reporting extends Component {
 
                         <div className="orderTypeContainer">
                             <div className="orderTypeItem col-sm-6">
-                                <h3 className="text-center">Aggregated Orders by Type</h3>
+                                <h2 className="text-center">Aggregated Orders by Type</h2>
                                 <div className="orderMethodTable">
                                     <Table striped bordered hover variant="dark">
                                         <thead>
