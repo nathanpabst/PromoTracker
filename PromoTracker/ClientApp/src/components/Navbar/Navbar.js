@@ -23,7 +23,7 @@ class NavBar extends React.Component {
                     <Nav className="nav navbar-nav navbar-right">                       
                         <LinkContainer to="/bookSpark">
                             <NavItem href="/bookSpark">
-                                Spark
+                                Promotions
                             </NavItem>
                         </LinkContainer>
                         <LinkContainer to="/sparkReporting">

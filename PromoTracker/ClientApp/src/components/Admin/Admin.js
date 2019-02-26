@@ -182,7 +182,7 @@ class Admin extends React.Component {
         return (
             <div>
 
-                <h3 className="text-center">Promotion Management Portal</h3>
+                <h1 className="text-center">Promotion Management Portal</h1>
 
                 <Search
                     onSearch={this.searchHandler}
@@ -190,7 +190,7 @@ class Admin extends React.Component {
                 />
 
                 <div className="addPromotion">
-                    <Button variant="success" size="lg" onClick={this.openAddModal}>Add Promotion</Button>
+                    <Button className="addBtn" size="lg" onClick={this.openAddModal}>Add Promotion</Button>
                 </div>
 
                 <AddModal
@@ -208,7 +208,7 @@ class Admin extends React.Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Start Date</th>
-                                <th>Expiration Date</th>
+                                <th>Expiration</th>
                                 <th>Description</th>
                                 <th>Category</th>
                                 <th>Restrictions</th>

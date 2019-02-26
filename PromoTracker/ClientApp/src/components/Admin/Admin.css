@@ -1,10 +1,56 @@
-﻿body {
+﻿/*body {
     background-color: white;
-}
+}*/
 
 .addPromotion {
     padding: 15px;
     margin: 10px;
     float: right;
 }
+.addBtn {
+    background-color: #ffe366;
+
+}
+.sortIcon {
+    padding: 6px;
+}
+
+.body {
+    color: #505050;
+}
+
+h1 {
+    font-family: Open sans-serif, Arial, Helvetica, sans-serif, sans-serif;
+    font-size: 50px;
+    font-weight: 300;
+    color: #4e9eb8
+}
+
+.modal-header {
+    background-color: #4e9eb8;
+    color: #fff;
+}
+
+.modal-title {
+    font-size: 20px;
+}
+
+.modal-body {
+    font-size: 15px;
+    color: #505050;
+}
+
+.modal-footer {
+    background-color: #4e9eb8;
+}
+
+.admin-table {
+    color: #505050;
+    font-size: 16px;
+}
+
+.blue-btn {
+    background-color: #4e9eb8;
+}
+
 
