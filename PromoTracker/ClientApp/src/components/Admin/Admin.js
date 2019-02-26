@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import EditModal from '../Modals/EditModal';
 import Search from './../Search/Search';
 import swal from 'sweetalert';
-import FontAwesome from 'react-fontawesome';
+//import FontAwesome from 'react-fontawesome';
 
 import './Admin.css';
 

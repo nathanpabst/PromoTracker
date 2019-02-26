@@ -2,6 +2,10 @@
     padding: 6px;
 }
 
+.body {
+    color: #505050;
+}
+
 h1 {
     font-family: Open sans-serif, Arial, Helvetica, sans-serif, sans-serif;
     font-size: 50px;
@@ -26,6 +30,11 @@ h1 {
 .modal-footer {
     background-color: #4e9eb8;
 
+}
+
+.promo-table {
+    color: #505050;
+    font-size: 16px;
 }
 
 .blue-btn {

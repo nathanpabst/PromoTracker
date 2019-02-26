@@ -9,7 +9,7 @@ class NavBar extends React.Component {
     render() {
 
         return (
-            <Navbar inverse collapseOnSelect bg="dark" >
+            <Navbar inverse collapseOnSelect className="menu">
                 <div className="container-fluid">
                 <Navbar.Header>
                     <Navbar.Brand className="navbar-brand">
